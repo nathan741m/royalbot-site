@@ -1,35 +1,145 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>RoyalBot - Anti Raid Discord</title>
 
-      </header>
+<script src="https://cdn.tailwindcss.com"></script>
 
-      {page==='home' && <>
-        <section className='text-center py-24 px-6'>
-          <h2 className='text-6xl font-extrabold mb-6 bg-gradient-to-r from-purple-400 to-pink-400 bg-clip-text text-transparent'>Faites régner l'ordre</h2>
-          <p className='text-xl text-gray-300 max-w-3xl mx-auto mb-8'>Le bot anti-raid ultime pour protéger Discord.</p>
-        </section>
-        <section className='grid md:grid-cols-4 gap-6 px-10 pb-20'>
-          {['🔥 Anti-Raid','🛡️ Modération','📜 Logs','✨ Mises à jour'].map((x,i)=><div key={i} className='bg-white/5 p-6 rounded-3xl'>{x}</div>)}
-        </section>
-      </>}
-
-      {page==='login' && <div className='max-w-md mx-auto mt-20 bg-white/5 p-8 rounded-2xl'>
-        <h2 className='text-3xl mb-6'>Connexion</h2>
-        <input className='w-full p-2 rounded text-black mb-3' placeholder='Pseudo' onChange={e=>setU(e.target.value)} />
-        <input className='w-full p-2 rounded text-black mb-3' placeholder='Mot de passe' onChange={e=>setP(e.target.value)} />
-        <button onClick={login} className='w-full bg-purple-600 py-3 rounded-xl'>Connexion</button>
-      </div>}
-
-      {page==='dashboard' && current && <div className='p-10'>
-        <h2 className='text-4xl'>Dashboard {current.username}</h2>
-        <p className='mt-4'>Grade : {current.role}</p>
-      </div>}
-
-      {page==='profile' && current && <div className='max-w-4xl mx-auto mt-10 bg-white/5 p-8 rounded-2xl'>
-        <button onClick={()=>setPage('home')} className='float-right'>❌</button>
-        <div className='text-6xl bg-blue-600 w-24 h-24 rounded-full flex items-center justify-center'>{current.username[0]}</div>
-        <h2 className='text-3xl mt-4'>{current.username}</h2>
-        <p>{current.role}</p>
-        <button onClick={logout} className='mt-6 bg-red-600 px-4 py-2 rounded'>Déconnexion</button>
-      </div>}
-    </div>
-  )
+<style>
+body {
+  margin: 0;
+  font-family: sans-serif;
+  background: radial-gradient(circle at top, #12001f, #000000);
+  overflow-x: hidden;
 }
+
+/* glow background */
+.glow {
+  position: absolute;
+  width: 600px;
+  height: 600px;
+  background: radial-gradient(circle, rgba(168,85,247,0.25), transparent 70%);
+  filter: blur(80px);
+  top: -200px;
+  left: -200px;
+  z-index: 0;
+}
+
+.glow2 {
+  position: absolute;
+  width: 500px;
+  height: 500px;
+  background: radial-gradient(circle, rgba(236,72,153,0.25), transparent 70%);
+  filter: blur(80px);
+  bottom: -200px;
+  right: -200px;
+  z-index: 0;
+}
+
+.card {
+  background: rgba(255,255,255,0.05);
+  backdrop-filter: blur(12px);
+  border: 1px solid rgba(168,85,247,0.2);
+  border-radius: 20px;
+  transition: 0.3s;
+}
+
+.card:hover {
+  transform: translateY(-5px);
+  border-color: rgba(168,85,247,0.6);
+}
+</style>
+
+</head>
+
+<body class="text-white">
+
+<div class="glow"></div>
+<div class="glow2"></div>
+
+<!-- HEADER -->
+<header class="flex justify-between items-center px-8 py-6 relative z-10">
+  <h1 class="text-2xl font-bold text-purple-400">👑 RoyalBot</h1>
+
+  <div class="flex gap-3">
+    <a href="https://discord.com/oauth2/authorize?client_id=1405970621724098611&permissions=8&scope=bot"
+       class="bg-purple-600 px-4 py-2 rounded-xl hover:bg-purple-500 transition">
+      Inviter
+    </a>
+
+    <a href="#login"
+       class="border border-purple-400 px-4 py-2 rounded-xl hover:bg-purple-900/30 transition">
+      Connexion
+    </a>
+  </div>
+</header>
+
+<!-- HERO -->
+<section class="text-center py-28 relative z-10">
+  <h2 class="text-6xl font-extrabold bg-gradient-to-r from-purple-400 to-pink-400 text-transparent bg-clip-text">
+    Protection Anti-Raid Ultime
+  </h2>
+
+  <p class="text-gray-300 mt-6 max-w-xl mx-auto">
+    Sécurise ton serveur Discord avec RoyalBot — modération, logs et anti-raid automatique.
+  </p>
+
+  <div class="mt-8 flex justify-center gap-4">
+    <a class="bg-purple-600 px-6 py-3 rounded-xl hover:scale-105 transition"
+       href="https://discord.com/oauth2/authorize?client_id=1405970621724098611&permissions=8&scope=bot">
+      Ajouter le bot
+    </a>
+
+    <a class="border border-purple-500 px-6 py-3 rounded-xl hover:bg-purple-900/40 transition"
+       href="https://discord.gg/fGn9gCyepm">
+      Support
+    </a>
+  </div>
+</section>
+
+<!-- FEATURES -->
+<section class="grid md:grid-cols-2 lg:grid-cols-4 gap-6 px-10 py-10 relative z-10">
+
+  <div class="card p-6">
+    🔥 <h3 class="font-bold mt-2">Anti-Raid</h3>
+    <p class="text-gray-400 text-sm mt-2">Protection automatique contre raids et attaques.</p>
+  </div>
+
+  <div class="card p-6">
+    🛡️ <h3 class="font-bold mt-2">Modération</h3>
+    <p class="text-gray-400 text-sm mt-2">Kick, ban, mute en un clic.</p>
+  </div>
+
+  <div class="card p-6">
+    📜 <h3 class="font-bold mt-2">Logs</h3>
+    <p class="text-gray-400 text-sm mt-2">Historique complet des actions.</p>
+  </div>
+
+  <div class="card p-6">
+    ✨ <h3 class="font-bold mt-2">Updates</h3>
+    <p class="text-gray-400 text-sm mt-2">Nouvelles features régulières.</p>
+  </div>
+
+</section>
+
+<!-- LOGIN -->
+<section id="login" class="text-center py-20 relative z-10">
+  <h2 class="text-3xl font-bold">Connexion Discord</h2>
+
+  <p class="text-gray-400 mt-3">Accède à ton dashboard RoyalBot</p>
+
+  <a class="mt-6 inline-block bg-indigo-600 px-6 py-3 rounded-xl hover:bg-indigo-500 transition"
+     href="https://discord.com/oauth2/authorize?client_id=1405970621724098611&scope=identify">
+    Se connecter
+  </a>
+</section>
+
+<!-- FOOTER -->
+<footer class="text-center py-6 text-gray-500 relative z-10">
+  👑 RoyalBot — Secure Discord Servers
+</footer>
+
+</body>
+</html>
