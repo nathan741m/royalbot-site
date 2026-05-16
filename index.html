@@ -1,114 +1,114 @@
-<!DOCTYPE html>
-<html lang="fr">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>RoyalBot - Anti Raid & Sécurité Discord</title>
-
-  <script src="https://cdn.tailwindcss.com"></script>
-
-  <style>
-    body {
-      background: radial-gradient(circle at top, #2a0a3d, #000);
-      overflow-x: hidden;
+export default function RoyalBotWebsite() {
+  const features = [
+    {
+      icon: "🔥",
+      title: "Protection anti-raid avancée",
+      desc: "RoyalBot assure sécurité, contrôle et performance pour votre serveur."
+    },
+    {
+      icon: "🛡️",
+      title: "Modération complète",
+      desc: "RoyalBot assure sécurité, contrôle et performance pour votre serveur."
+    },
+    {
+      icon: "📜",
+      title: "Logs détaillés",
+      desc: "RoyalBot assure sécurité, contrôle et performance pour votre serveur."
+    },
+    {
+      icon: "✨",
+      title: "Mises à jour régulières",
+      desc: "RoyalBot assure sécurité, contrôle et performance pour votre serveur."
     }
+  ];
 
-    .glow {
-      text-shadow: 0 0 20px rgba(168,85,247,0.8);
-    }
+  return (
+    <div className="min-h-screen bg-gradient-to-br from-black via-purple-950 to-black text-white font-sans">
 
-    .card {
-      backdrop-filter: blur(10px);
-      background: rgba(255,255,255,0.05);
-    }
-  </style>
-</head>
+      {/* HEADER */}
+      <header className="flex justify-between items-center p-6 border-b border-purple-700/40 backdrop-blur-xl">
+        <h1 className="text-3xl font-bold text-purple-400">👑 RoyalBot</h1>
 
-<body class="text-white font-sans">
+        <div className="flex gap-4">
+          <a
+            href="https://discord.com/oauth2/authorize?client_id=1405970621724098611&permissions=8&integration_type=0&scope=bot"
+            className="px-5 py-2 rounded-2xl bg-purple-600 hover:bg-purple-500 transition"
+          >
+            Inviter
+          </a>
 
-<!-- HEADER -->
-<header class="flex justify-between items-center px-6 py-5 border-b border-purple-700/30">
-  <h1 class="text-2xl font-bold text-purple-400">👑 RoyalBot</h1>
+          <a
+            href="#login"
+            className="px-5 py-2 rounded-2xl border border-purple-400 hover:bg-purple-700/30 transition"
+          >
+            Connexion Discord
+          </a>
+        </div>
+      </header>
 
-  <div class="flex gap-3 flex-wrap">
-    <a href="https://discord.com/oauth2/authorize?client_id=1405970621724098611&permissions=8&scope=bot"
-       class="bg-purple-600 px-4 py-2 rounded-xl hover:scale-105 transition">
-      ➕ Inviter
-    </a>
+      {/* HERO */}
+      <section className="text-center py-24 px-6">
+        <h2 className="text-6xl font-extrabold mb-6 bg-gradient-to-r from-purple-400 to-pink-400 bg-clip-text text-transparent">
+          Faites régner l'ordre
+        </h2>
 
-    <!-- LOGIN DISCORD -->
-    <a href="https://discord.com/oauth2/authorize?client_id=1405970621724098611&redirect_uri=https://example.com&response_type=token&scope=identify"
-       class="border border-purple-500 px-4 py-2 rounded-xl hover:bg-purple-900/40 transition">
-      🔐 Connexion Discord
-    </a>
+        <p className="text-xl text-gray-300 max-w-3xl mx-auto mb-8">
+          Le bot anti-raid ultime pour protéger et gérer votre royaume Discord avec puissance.
+        </p>
 
-    <a href="https://discord.gg/fGn9gCyepm"
-       class="border border-gray-500 px-4 py-2 rounded-xl hover:bg-gray-800 transition">
-      Support
-    </a>
-  </div>
-</header>
+        <div className="flex justify-center gap-4 flex-wrap">
+          <a
+            href="https://discord.com/oauth2/authorize?client_id=1405970621724098611&permissions=8&integration_type=0&scope=bot"
+            className="px-8 py-4 rounded-2xl bg-purple-600 hover:scale-105 transition"
+          >
+            Ajouter RoyalBot
+          </a>
 
-<!-- HERO -->
-<section class="text-center py-28 px-6">
-  <h2 class="text-5xl md:text-7xl font-extrabold glow text-purple-300">
-    RoyalBot
-  </h2>
+          <a
+            href="https://discord.gg/fGn9gCyepm"
+            className="px-8 py-4 rounded-2xl border border-purple-500 hover:bg-purple-800/40 transition"
+          >
+            Support
+          </a>
+        </div>
+      </section>
 
-  <p class="text-gray-300 mt-6 max-w-2xl mx-auto text-lg">
-    Le bot Discord <span class="text-purple-400">anti-raid ultime</span> pour sécuriser, modérer et contrôler ton serveur avec puissance.
-  </p>
+      {/* FEATURES */}
+      <section className="grid md:grid-cols-2 lg:grid-cols-4 gap-6 px-10 pb-20">
+        {features.map((f) => (
+          <div
+            key={f.title}
+            className="bg-white/5 backdrop-blur-lg p-6 rounded-3xl border border-purple-500/30 hover:scale-105 transition"
+          >
+            <div className="text-4xl mb-4">{f.icon}</div>
+            <h3 className="text-xl font-bold mb-2">{f.title}</h3>
+            <p className="text-gray-400">{f.desc}</p>
+          </div>
+        ))}
+      </section>
 
-  <div class="mt-10 flex justify-center gap-4 flex-wrap">
-    <a href="https://discord.com/oauth2/authorize?client_id=1405970621724098611&permissions=8&scope=bot"
-       class="bg-purple-600 px-6 py-3 rounded-xl hover:scale-105 transition">
-      🚀 Ajouter RoyalBot
-    </a>
+      {/* LOGIN */}
+      <section
+        id="login"
+        className="py-20 text-center bg-purple-950/30"
+      >
+        <h2 className="text-4xl font-bold mb-6">Connexion Discord</h2>
+        <p className="text-gray-300 mb-8">
+          Connectez-vous pour accéder au dashboard RoyalBot.
+        </p>
 
-    <a href="https://discord.gg/fGn9gCyepm"
-       class="border border-purple-500 px-6 py-3 rounded-xl hover:bg-purple-900/40 transition">
-      💬 Serveur Support
-    </a>
-  </div>
-</section>
+        <a
+          href="https://discord.com/oauth2/authorize?client_id=1405970621724098611&scope=identify&response_type=token"
+          className="px-10 py-4 bg-indigo-600 rounded-2xl hover:bg-indigo-500 transition text-lg"
+        >
+          Se connecter avec Discord
+        </a>
+      </section>
 
-<!-- FEATURES -->
-<section class="grid md:grid-cols-2 lg:grid-cols-4 gap-6 px-10 pb-24">
-
-  <div class="card p-6 rounded-2xl border border-purple-700/30">
-    <h3 class="text-xl font-bold">🔥 Anti-Raid</h3>
-    <p class="text-gray-400 mt-2">Bloque automatiquement raids, bots et spam.</p>
-  </div>
-
-  <div class="card p-6 rounded-2xl border border-purple-700/30">
-    <h3 class="text-xl font-bold">🛡️ Modération</h3>
-    <p class="text-gray-400 mt-2">Kick, ban, mute et gestion rapide du serveur.</p>
-  </div>
-
-  <div class="card p-6 rounded-2xl border border-purple-700/30">
-    <h3 class="text-xl font-bold">📜 Logs</h3>
-    <p class="text-gray-400 mt-2">Toutes les actions sont enregistrées en temps réel.</p>
-  </div>
-
-  <div class="card p-6 rounded-2xl border border-purple-700/30">
-    <h3 class="text-xl font-bold">✨ Évolution</h3>
-    <p class="text-gray-400 mt-2">Mises à jour fréquentes et nouvelles fonctions.</p>
-  </div>
-
-</section>
-
-<!-- ABOUT -->
-<section class="text-center px-6 pb-24">
-  <h2 class="text-3xl font-bold text-purple-300">💠 Un bot en constante évolution</h2>
-  <p class="text-gray-400 mt-4 max-w-2xl mx-auto">
-    RoyalBot est conçu pour grandir avec ton serveur. Chaque mise à jour améliore la sécurité, la rapidité et les outils de modération.
-  </p>
-</section>
-
-<!-- FOOTER -->
-<footer class="text-center py-10 border-t border-purple-700/30 text-gray-500">
-  👑 RoyalBot — Sécurité, contrôle et puissance pour ton serveur Discord
-</footer>
-
-</body>
-</html>
+      {/* FOOTER */}
+      <footer className="text-center py-8 border-t border-purple-700/30 text-gray-400">
+        👑 RoyalBot — Faites régner la sécurité sur votre royaume Discord.
+      </footer>
+    </div>
+  );
+}
