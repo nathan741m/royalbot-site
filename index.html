@@ -1,101 +1,144 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>RoyalBot</title>
-  <script src="https://cdn.tailwindcss.com"></script>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>RoyalBot - Anti Raid Discord</title>
 
-  <style>
-    body {
-      background: radial-gradient(circle at top, #000, #2a0040, #000);
-      color: white;
-      font-family: sans-serif;
-      margin: 0;
-    }
+<script src="https://cdn.tailwindcss.com"></script>
 
-    .glass {
-      background: rgba(255,255,255,0.05);
-      backdrop-filter: blur(10px);
-      border-radius: 24px;
-    }
-  </style>
+<style>
+body {
+  margin: 0;
+  font-family: sans-serif;
+  background: radial-gradient(circle at top, #12001f, #000000);
+  overflow-x: hidden;
+}
+
+/* glow background */
+.glow {
+  position: absolute;
+  width: 600px;
+  height: 600px;
+  background: radial-gradient(circle, rgba(168,85,247,0.25), transparent 70%);
+  filter: blur(80px);
+  top: -200px;
+  left: -200px;
+  z-index: 0;
+}
+
+.glow2 {
+  position: absolute;
+  width: 500px;
+  height: 500px;
+  background: radial-gradient(circle, rgba(236,72,153,0.25), transparent 70%);
+  filter: blur(80px);
+  bottom: -200px;
+  right: -200px;
+  z-index: 0;
+}
+
+.card {
+  background: rgba(255,255,255,0.05);
+  backdrop-filter: blur(12px);
+  border: 1px solid rgba(168,85,247,0.2);
+  border-radius: 20px;
+  transition: 0.3s;
+}
+
+.card:hover {
+  transform: translateY(-5px);
+  border-color: rgba(168,85,247,0.6);
+}
+</style>
+
 </head>
 
-<body>
+<body class="text-white">
 
-<header style="display:flex;justify-content:space-between;padding:20px;border-bottom:1px solid purple;">
-  <h1 style="color:#a855f7;">👑 RoyalBot</h1>
+<div class="glow"></div>
+<div class="glow2"></div>
 
-  <div style="display:flex;gap:10px;">
+<!-- HEADER -->
+<header class="flex justify-between items-center px-8 py-6 relative z-10">
+  <h1 class="text-2xl font-bold text-purple-400">👑 RoyalBot</h1>
+
+  <div class="flex gap-3">
     <a href="https://discord.com/oauth2/authorize?client_id=1405970621724098611&permissions=8&scope=bot"
-       style="background:#7c3aed;padding:10px 15px;border-radius:10px;color:white;text-decoration:none;">
+       class="bg-purple-600 px-4 py-2 rounded-xl hover:bg-purple-500 transition">
       Inviter
     </a>
 
     <a href="#login"
-       style="border:1px solid #a855f7;padding:10px 15px;border-radius:10px;color:white;text-decoration:none;">
-      Connexion Discord
+       class="border border-purple-400 px-4 py-2 rounded-xl hover:bg-purple-900/30 transition">
+      Connexion
     </a>
   </div>
 </header>
 
-<section style="text-align:center;padding:80px 20px;">
-  <h2 style="font-size:40px;background:linear-gradient(to right,#a855f7,#ec4899);-webkit-background-clip:text;color:transparent;">
-    Faites régner l'ordre
+<!-- HERO -->
+<section class="text-center py-28 relative z-10">
+  <h2 class="text-6xl font-extrabold bg-gradient-to-r from-purple-400 to-pink-400 text-transparent bg-clip-text">
+    Protection Anti-Raid Ultime
   </h2>
 
-  <p style="max-width:600px;margin:auto;color:#ccc;">
-    Bot anti-raid ultime pour sécuriser ton serveur Discord.
+  <p class="text-gray-300 mt-6 max-w-xl mx-auto">
+    Sécurise ton serveur Discord avec RoyalBot — modération, logs et anti-raid automatique.
   </p>
 
-  <div style="margin-top:30px;display:flex;justify-content:center;gap:10px;">
-    <a href="https://discord.com/oauth2/authorize?client_id=1405970621724098611&scope=bot"
-       style="background:#7c3aed;padding:15px 20px;border-radius:10px;color:white;text-decoration:none;">
-      Ajouter RoyalBot
+  <div class="mt-8 flex justify-center gap-4">
+    <a class="bg-purple-600 px-6 py-3 rounded-xl hover:scale-105 transition"
+       href="https://discord.com/oauth2/authorize?client_id=1405970621724098611&permissions=8&scope=bot">
+      Ajouter le bot
     </a>
 
-    <a href="https://discord.gg/fGn9gCyepm"
-       style="border:1px solid purple;padding:15px 20px;border-radius:10px;color:white;text-decoration:none;">
+    <a class="border border-purple-500 px-6 py-3 rounded-xl hover:bg-purple-900/40 transition"
+       href="https://discord.gg/fGn9gCyepm">
       Support
     </a>
   </div>
 </section>
 
-<section style="display:grid;grid-template-columns:repeat(2,1fr);gap:15px;padding:40px;">
+<!-- FEATURES -->
+<section class="grid md:grid-cols-2 lg:grid-cols-4 gap-6 px-10 py-10 relative z-10">
 
-  <div class="glass" style="padding:20px;">
-    🔥 <h3>Anti-raid</h3>
-    <p>Protection automatique contre attaques.</p>
+  <div class="card p-6">
+    🔥 <h3 class="font-bold mt-2">Anti-Raid</h3>
+    <p class="text-gray-400 text-sm mt-2">Protection automatique contre raids et attaques.</p>
   </div>
 
-  <div class="glass" style="padding:20px;">
-    🛡️ <h3>Modération</h3>
-    <p>Gestion simple du serveur.</p>
+  <div class="card p-6">
+    🛡️ <h3 class="font-bold mt-2">Modération</h3>
+    <p class="text-gray-400 text-sm mt-2">Kick, ban, mute en un clic.</p>
   </div>
 
-  <div class="glass" style="padding:20px;">
-    📜 <h3>Logs</h3>
-    <p>Tout est enregistré.</p>
+  <div class="card p-6">
+    📜 <h3 class="font-bold mt-2">Logs</h3>
+    <p class="text-gray-400 text-sm mt-2">Historique complet des actions.</p>
   </div>
 
-  <div class="glass" style="padding:20px;">
-    ✨ <h3>Updates</h3>
-    <p>Améliorations régulières.</p>
+  <div class="card p-6">
+    ✨ <h3 class="font-bold mt-2">Updates</h3>
+    <p class="text-gray-400 text-sm mt-2">Nouvelles features régulières.</p>
   </div>
 
 </section>
 
-<section id="login" style="text-align:center;padding:60px;">
-  <h2>Connexion Discord</h2>
-  <a href="https://discord.com/oauth2/authorize?client_id=1405970621724098611&scope=identify"
-     style="background:#4f46e5;padding:15px 25px;border-radius:10px;color:white;text-decoration:none;">
+<!-- LOGIN -->
+<section id="login" class="text-center py-20 relative z-10">
+  <h2 class="text-3xl font-bold">Connexion Discord</h2>
+
+  <p class="text-gray-400 mt-3">Accède à ton dashboard RoyalBot</p>
+
+  <a class="mt-6 inline-block bg-indigo-600 px-6 py-3 rounded-xl hover:bg-indigo-500 transition"
+     href="https://discord.com/oauth2/authorize?client_id=1405970621724098611&scope=identify">
     Se connecter
   </a>
 </section>
 
-<footer style="text-align:center;padding:20px;color:gray;">
-  👑 RoyalBot — Sécurité Discord
+<!-- FOOTER -->
+<footer class="text-center py-6 text-gray-500 relative z-10">
+  👑 RoyalBot — Secure Discord Servers
 </footer>
 
 </body>
