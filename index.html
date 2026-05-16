@@ -1,42 +1,4 @@
-import { useState, useEffect } from 'react';
 
-export default function RoyalBotFullSite() {
-  const [page,setPage]=useState('home');
-  const [users,setUsers]=useState([]);
-  const [current,setCurrent]=useState(null);
-  const [u,setU]=useState(''); const [p,setP]=useState('');
-
-  useEffect(()=>{
-    const saved=JSON.parse(localStorage.getItem('royalUsers')||'[]');
-    if(!saved.length)saved.push({username:'admin',password:'ADMIN1234',role:'Admin',status:'connected'});
-    setUsers(saved);
-    setCurrent(JSON.parse(localStorage.getItem('royalCurrent')||'null'));
-  },[]);
-
-  useEffect(()=>{
-    localStorage.setItem('royalUsers',JSON.stringify(users));
-    localStorage.setItem('royalCurrent',JSON.stringify(current));
-  },[users,current]);
-
-  const login=()=>{
-    const user=users.find(x=>x.username===u&&x.password===p);
-    if(user){setCurrent(user);setPage('dashboard')} else alert('Identifiants invalides');
-  };
-
-  const logout=()=>{setCurrent(null);setPage('home')};
-
-  return (
-    <div className='min-h-screen bg-gradient-to-br from-black via-purple-950 to-black text-white'>
-      <header className='flex justify-between items-center p-6 border-b border-purple-700/40'>
-        <h1 className='text-3xl font-bold text-purple-400'>👑 RoyalBot</h1>
-        <div className='flex gap-4 items-center'>
-          <a href='#' className='px-5 py-2 rounded-2xl bg-purple-600'>Inviter</a>
-          {current ? (
-            <button onClick={()=>setPage('profile')} className='px-4 py-2 rounded-full bg-indigo-600'>👤 {current.username}</button>
-          ) : (
-            <button onClick={()=>setPage('login')} className='px-5 py-2 rounded-2xl border border-purple-400'>Connexion</button>
-          )}
-        </div>
       </header>
 
       {page==='home' && <>
