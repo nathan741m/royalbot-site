@@ -70,6 +70,7 @@ body {
 
   <nav class="flex flex-wrap items-center gap-3 text-sm">
     <a href="#features" class="text-gray-300 hover:text-white transition">Fonctionnalités</a>
+    <a href="#profil" class="text-gray-300 hover:text-white transition">Profil</a>
     <a href="#cgu" class="text-gray-300 hover:text-white transition">Conditions d'utilisation</a>
     <a href="#confidentialite" class="text-gray-300 hover:text-white transition">Confidentialité</a>
 
@@ -141,10 +142,64 @@ body {
       Connecte-toi à ton dashboard RoyalBot.
     </p>
 
-    <a class="mt-6 inline-block bg-indigo-600 px-6 py-3 rounded-lg hover:bg-indigo-500 transition"
-       href="https://discord.com/api/oauth2/authorize?client_id=1405970621724098611&redirect_uri=https%3A%2F%2Fnathan741m.github.io%2Froyalbot-site%2F&response_type=code&scope=identify%20guilds">
+    <a class="discord-login mt-6 inline-block bg-indigo-600 px-6 py-3 rounded-lg hover:bg-indigo-500 transition"
+       href="http://localhost:3000/auth/discord">
       Se connecter avec Discord
     </a>
+  </section>
+
+  <section id="profil" class="px-6 py-16 relative z-10">
+    <div class="mx-auto max-w-4xl card p-6 md:p-8">
+      <div class="flex flex-col gap-6 md:flex-row md:items-center md:justify-between">
+        <div>
+          <p class="text-sm uppercase tracking-wide text-purple-300">Dashboard</p>
+          <h2 class="mt-2 text-3xl font-bold">Profil Discord</h2>
+          <p id="profileStatus" class="mt-2 text-gray-400">Connecte-toi avec Discord pour afficher ton profil.</p>
+        </div>
+
+        <a id="profileLoginButton"
+           class="inline-block bg-indigo-600 px-5 py-3 text-center rounded-lg hover:bg-indigo-500 transition"
+           href="http://localhost:3000/auth/discord">
+          Connexion Discord
+        </a>
+      </div>
+
+      <div id="profileCard" class="mt-8 hidden grid gap-6 md:grid-cols-[auto_1fr] md:items-center">
+        <div id="profileAvatar" class="flex h-24 w-24 items-center justify-center rounded-full bg-purple-600 text-4xl font-bold">
+          R
+        </div>
+
+        <div>
+          <h3 id="profileName" class="text-2xl font-bold">Utilisateur Discord</h3>
+          <p id="profileId" class="mt-1 text-sm text-gray-400">ID Discord non chargé</p>
+
+          <div class="mt-5 grid gap-3 sm:grid-cols-3">
+            <div class="rounded-lg border border-purple-500/20 bg-white/5 p-4">
+              <p class="text-sm text-gray-400">Serveurs</p>
+              <p id="profileGuilds" class="mt-1 text-2xl font-bold">--</p>
+            </div>
+
+            <div class="rounded-lg border border-purple-500/20 bg-white/5 p-4">
+              <p class="text-sm text-gray-400">Statut</p>
+              <p class="mt-1 text-lg font-bold text-green-300">Connecté</p>
+            </div>
+
+            <div class="rounded-lg border border-purple-500/20 bg-white/5 p-4">
+              <p class="text-sm text-gray-400">Accès</p>
+              <p class="mt-1 text-lg font-bold text-purple-300">Dashboard</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div id="profileNotice" class="mt-6 rounded-lg border border-indigo-400/20 bg-indigo-500/10 p-4 text-sm text-indigo-100">
+        La connexion Discord passe par le backend sécurisé RoyalBot. Le secret Discord reste côté serveur et n'est jamais exposé dans cette page.
+      </div>
+
+      <button id="logoutButton" class="mt-6 hidden border border-purple-400 px-5 py-3 rounded-lg text-sm hover:bg-purple-900/30 transition">
+        Déconnexion
+      </button>
+    </div>
   </section>
 
   <section id="cgu" class="legal-section px-6 py-16 relative z-10">
@@ -163,86 +218,6 @@ body {
           <h3 class="font-bold text-white">2. Acceptation</h3>
           <p class="mt-2">En invitant RoyalBot sur un serveur Discord ou en utilisant ses fonctionnalités, l'utilisateur accepte les présentes conditions. Si vous n'acceptez pas ces conditions, vous devez retirer le bot du serveur concerné.</p>
         </div>
-
-        <div>
-          <h3 class="font-bold text-white">3. Conditions d'accès</h3>
-          <p class="mt-2">L'utilisation de RoyalBot nécessite un compte Discord et le respect des conditions d'utilisation de Discord. L'utilisateur doit disposer des autorisations nécessaires pour ajouter ou configurer le bot sur un serveur.</p>
-        </div>
-
-        <div>
-          <h3 class="font-bold text-white">4. Utilisation autorisée</h3>
-          <p class="mt-2">RoyalBot doit être utilisé uniquement pour la gestion, la protection et la modération de serveurs Discord. Toute utilisation abusive, frauduleuse, illégale, intrusive ou contraire aux règles de Discord est interdite.</p>
-        </div>
-
-        <div>
-          <h3 class="font-bold text-white">5. Responsabilité</h3>
-          <p class="mt-2">RoyalBot est fourni en l'état. Malgré les efforts réalisés pour assurer sa fiabilité, aucune garantie absolue n'est donnée concernant l'absence d'interruption, d'erreur ou de faille. Les administrateurs restent responsables de la configuration du bot et des actions effectuées sur leur serveur.</p>
-        </div>
-
-        <div>
-          <h3 class="font-bold text-white">6. Sanctions et suspension</h3>
-          <p class="mt-2">L'accès à RoyalBot peut être limité, suspendu ou supprimé en cas d'abus, de tentative de contournement, d'utilisation malveillante ou de violation des présentes conditions.</p>
-        </div>
-
-        <div>
-          <h3 class="font-bold text-white">7. Modification des conditions</h3>
-          <p class="mt-2">Ces conditions peuvent être modifiées afin de refléter l'évolution du service, des obligations légales ou des règles de Discord. La version publiée sur ce site constitue la version applicable.</p>
-        </div>
-
-        <div>
-          <h3 class="font-bold text-white">8. Contact</h3>
-          <p class="mt-2">Pour toute question relative aux conditions d'utilisation, vous pouvez contacter l'équipe via le serveur support Discord : <a class="text-purple-300 hover:text-purple-200" href="https://discord.gg/fGn9gCyepm">https://discord.gg/fGn9gCyepm</a>.</p>
-        </div>
-      </div>
-    </article>
-  </section>
-
-  <section id="confidentialite" class="legal-section px-6 py-16 relative z-10">
-    <article class="mx-auto max-w-4xl card p-6 md:p-8">
-      <p class="text-sm uppercase tracking-wide text-purple-300">Document légal</p>
-      <h2 class="mt-2 text-3xl font-bold">Politique de confidentialité</h2>
-      <p class="mt-2 text-sm text-gray-400">Dernière mise à jour : 17 mai 2026</p>
-
-      <div class="mt-8 space-y-6 text-gray-300">
-        <div>
-          <h3 class="font-bold text-white">1. Données collectées</h3>
-          <p class="mt-2">RoyalBot peut traiter certaines données nécessaires à son fonctionnement, notamment les identifiants Discord des utilisateurs, des serveurs, des salons, des rôles, ainsi que les informations liées aux actions de modération et de sécurité.</p>
-        </div>
-
-        <div>
-          <h3 class="font-bold text-white">2. Finalités du traitement</h3>
-          <p class="mt-2">Ces données sont utilisées pour fournir les fonctionnalités du bot : anti-raid, modération, logs, configuration du serveur, sécurité et assistance technique.</p>
-        </div>
-
-        <div>
-          <h3 class="font-bold text-white">3. Données de connexion Discord</h3>
-          <p class="mt-2">Lorsque vous utilisez la connexion Discord, RoyalBot peut recevoir les informations autorisées par Discord selon les permissions accordées, par exemple l'identifiant du compte et la liste des serveurs accessibles. Ces données servent uniquement à afficher et gérer les serveurs autorisés.</p>
-        </div>
-
-        <div>
-          <h3 class="font-bold text-white">4. Conservation</h3>
-          <p class="mt-2">Les données sont conservées uniquement pendant la durée nécessaire au fonctionnement du service, à la sécurité du serveur ou au respect d'obligations légales. Les données peuvent être supprimées lorsqu'elles ne sont plus utiles ou lorsqu'un serveur retire RoyalBot.</p>
-        </div>
-
-        <div>
-          <h3 class="font-bold text-white">5. Partage des données</h3>
-          <p class="mt-2">Les données ne sont pas vendues. Elles peuvent être traitées par Discord et par les services techniques strictement nécessaires au fonctionnement, à l'hébergement ou à la maintenance de RoyalBot.</p>
-        </div>
-
-        <div>
-          <h3 class="font-bold text-white">6. Sécurité</h3>
-          <p class="mt-2">Des mesures raisonnables sont mises en place pour protéger les données traitées par RoyalBot. Aucun système n'étant totalement infaillible, les administrateurs sont invités à limiter les permissions du bot aux besoins réels de leur serveur.</p>
-        </div>
-
-        <div>
-          <h3 class="font-bold text-white">7. Droits des utilisateurs</h3>
-          <p class="mt-2">Selon la réglementation applicable, vous pouvez demander l'accès, la correction ou la suppression des données vous concernant. Pour exercer ces droits, contactez l'équipe via le serveur support Discord.</p>
-        </div>
-
-        <div>
-          <h3 class="font-bold text-white">8. Contact confidentialité</h3>
-          <p class="mt-2">Pour toute demande liée à la confidentialité, utilisez le serveur support : <a class="text-purple-300 hover:text-purple-200" href="https://discord.gg/fGn9gCyepm">https://discord.gg/fGn9gCyepm</a>.</p>
-        </div>
       </div>
     </article>
   </section>
@@ -257,6 +232,60 @@ body {
 
   <p class="mt-4">👑 RoyalBot - Secure Discord Servers</p>
 </footer>
+
+<script>
+const loginUrl = window.location.protocol === "file:"
+  ? "http://localhost:3000/auth/discord"
+  : "/auth/discord";
+
+document.querySelectorAll(".discord-login, #profileLoginButton").forEach((link) => {
+  link.href = loginUrl;
+});
+
+const params = new URLSearchParams(window.location.search);
+const storedProfile = localStorage.getItem("royalbot_discord_profile");
+const profilePayload = params.get("profile");
+
+const profileStatus = document.getElementById("profileStatus");
+const profileCard = document.getElementById("profileCard");
+const profileAvatar = document.getElementById("profileAvatar");
+const profileName = document.getElementById("profileName");
+const profileId = document.getElementById("profileId");
+const profileGuilds = document.getElementById("profileGuilds");
+const profileLoginButton = document.getElementById("profileLoginButton");
+const logoutButton = document.getElementById("logoutButton");
+
+function showProfile(profile) {
+  profileCard.classList.remove("hidden");
+  logoutButton.classList.remove("hidden");
+  profileLoginButton.classList.add("hidden");
+  profileStatus.textContent = "Ton profil Discord est connecté à RoyalBot.";
+  profileName.textContent = profile.username || "Utilisateur Discord";
+  profileId.textContent = profile.id ? `ID Discord : ${profile.id}` : "ID Discord non chargé";
+  profileGuilds.textContent = profile.guilds ?? "--";
+
+  if (profile.avatarUrl) {
+    profileAvatar.innerHTML = `<img src="${profile.avatarUrl}" alt="Avatar Discord" class="h-24 w-24 rounded-full object-cover">`;
+  } else {
+    profileAvatar.textContent = (profile.username || "R").charAt(0).toUpperCase();
+  }
+}
+
+if (storedProfile) {
+  showProfile(JSON.parse(storedProfile));
+} else if (profilePayload) {
+  const profile = JSON.parse(atob(profilePayload));
+  localStorage.setItem("royalbot_discord_profile", JSON.stringify(profile));
+  showProfile(profile);
+  window.history.replaceState({}, document.title, `${window.location.pathname}#profil`);
+}
+
+logoutButton.addEventListener("click", () => {
+  localStorage.removeItem("royalbot_discord_profile");
+  window.location.href = "#profil";
+  window.location.reload();
+});
+</script>
 
 </body>
 </html>
