@@ -41,13 +41,21 @@ body {
   background: rgba(255,255,255,0.05);
   backdrop-filter: blur(12px);
   border: 1px solid rgba(168,85,247,0.2);
-  border-radius: 20px;
+  border-radius: 8px;
   transition: 0.3s;
 }
 
 .card:hover {
   transform: translateY(-5px);
   border-color: rgba(168,85,247,0.6);
+}
+
+.legal-section {
+  display: none;
+}
+
+.legal-section:target {
+  display: block;
 }
 </style>
 </head>
@@ -57,83 +65,197 @@ body {
 <div class="glow"></div>
 <div class="glow2"></div>
 
-<header class="flex justify-between items-center px-8 py-6 relative z-10">
-  <h1 class="text-2xl font-bold text-purple-400">👑 RoyalBot</h1>
+<header class="flex flex-col gap-5 px-6 py-5 relative z-10 md:flex-row md:items-center md:justify-between md:px-8">
+  <a href="#" class="text-2xl font-bold text-purple-400">👑 RoyalBot</a>
 
-  <div class="flex gap-3">
+  <nav class="flex flex-wrap items-center gap-3 text-sm">
+    <a href="#features" class="text-gray-300 hover:text-white transition">Fonctionnalités</a>
+    <a href="#cgu" class="text-gray-300 hover:text-white transition">Conditions d'utilisation</a>
+    <a href="#confidentialite" class="text-gray-300 hover:text-white transition">Confidentialité</a>
+
     <a href="https://discord.com/oauth2/authorize?client_id=1405970621724098611&permissions=8&scope=bot"
-       class="bg-purple-600 px-4 py-2 rounded-xl hover:bg-purple-500 transition">
+       class="bg-purple-600 px-4 py-2 rounded-lg hover:bg-purple-500 transition">
       Inviter
     </a>
 
     <a href="#login"
-       class="border border-purple-400 px-4 py-2 rounded-xl hover:bg-purple-900/30 transition">
+       class="border border-purple-400 px-4 py-2 rounded-lg hover:bg-purple-900/30 transition">
       Connexion
     </a>
-  </div>
+  </nav>
 </header>
 
-<section class="text-center py-28 relative z-10">
-  <h2 class="text-6xl font-extrabold bg-gradient-to-r from-purple-400 to-pink-400 text-transparent bg-clip-text">
-    Protection Anti-Raid Ultime
-  </h2>
+<main>
+  <section class="text-center py-24 px-6 relative z-10">
+    <h1 class="text-4xl font-extrabold bg-gradient-to-r from-purple-400 to-pink-400 text-transparent bg-clip-text md:text-6xl">
+      Protection Anti-Raid Ultime
+    </h1>
 
-  <p class="text-gray-300 mt-6 max-w-xl mx-auto">
-    Sécurise ton serveur Discord avec RoyalBot — modération, logs et anti-raid automatique.
-  </p>
+    <p class="text-gray-300 mt-6 max-w-xl mx-auto">
+      Sécurise ton serveur Discord avec RoyalBot : modération, logs et anti-raid automatique.
+    </p>
 
-  <div class="mt-8 flex justify-center gap-4">
-    <a class="bg-purple-600 px-6 py-3 rounded-xl hover:scale-105 transition"
-       href="https://discord.com/oauth2/authorize?client_id=1405970621724098611&permissions=8&scope=bot">
-      Ajouter le bot
+    <div class="mt-8 flex flex-col justify-center gap-4 sm:flex-row">
+      <a class="bg-purple-600 px-6 py-3 rounded-lg hover:scale-105 transition"
+         href="https://discord.com/oauth2/authorize?client_id=1405970621724098611&permissions=8&scope=bot">
+        Ajouter le bot
+      </a>
+
+      <a class="border border-purple-500 px-6 py-3 rounded-lg hover:bg-purple-900/40 transition"
+         href="https://discord.gg/fGn9gCyepm">
+        Support
+      </a>
+    </div>
+  </section>
+
+  <section id="features" class="grid gap-6 px-6 py-10 relative z-10 md:grid-cols-2 lg:grid-cols-4 lg:px-10">
+    <div class="card p-6">
+      <div class="text-2xl">🔥</div>
+      <h2 class="font-bold mt-2">Anti-Raid</h2>
+      <p class="text-gray-400 text-sm mt-2">Protection automatique contre raids et attaques.</p>
+    </div>
+
+    <div class="card p-6">
+      <div class="text-2xl">🛡️</div>
+      <h2 class="font-bold mt-2">Modération</h2>
+      <p class="text-gray-400 text-sm mt-2">Kick, ban, mute en un clic.</p>
+    </div>
+
+    <div class="card p-6">
+      <div class="text-2xl">📜</div>
+      <h2 class="font-bold mt-2">Logs</h2>
+      <p class="text-gray-400 text-sm mt-2">Historique complet des actions.</p>
+    </div>
+
+    <div class="card p-6">
+      <div class="text-2xl">✨</div>
+      <h2 class="font-bold mt-2">Updates</h2>
+      <p class="text-gray-400 text-sm mt-2">Nouvelles fonctionnalités régulières.</p>
+    </div>
+  </section>
+
+  <section id="login" class="text-center py-20 px-6 relative z-10">
+    <h2 class="text-3xl font-bold">Connexion Discord</h2>
+
+    <p class="text-gray-400 mt-3">
+      Connecte-toi à ton dashboard RoyalBot.
+    </p>
+
+    <a class="mt-6 inline-block bg-indigo-600 px-6 py-3 rounded-lg hover:bg-indigo-500 transition"
+       href="https://discord.com/api/oauth2/authorize?client_id=1405970621724098611&redirect_uri=https%3A%2F%2Fnathan741m.github.io%2Froyalbot-site%2F&response_type=code&scope=identify%20guilds">
+      Se connecter avec Discord
     </a>
+  </section>
 
-    <a class="border border-purple-500 px-6 py-3 rounded-xl hover:bg-purple-900/40 transition"
-       href="https://discord.gg/fGn9gCyepm">
-      Support
-    </a>
+  <section id="cgu" class="legal-section px-6 py-16 relative z-10">
+    <article class="mx-auto max-w-4xl card p-6 md:p-8">
+      <p class="text-sm uppercase tracking-wide text-purple-300">Document légal</p>
+      <h2 class="mt-2 text-3xl font-bold">Conditions générales d'utilisation</h2>
+      <p class="mt-2 text-sm text-gray-400">Dernière mise à jour : 17 mai 2026</p>
+
+      <div class="mt-8 space-y-6 text-gray-300">
+        <div>
+          <h3 class="font-bold text-white">1. Objet</h3>
+          <p class="mt-2">Les présentes conditions encadrent l'utilisation de RoyalBot, un bot Discord destiné à aider les administrateurs de serveurs à renforcer la modération, la sécurité anti-raid et le suivi des actions.</p>
+        </div>
+
+        <div>
+          <h3 class="font-bold text-white">2. Acceptation</h3>
+          <p class="mt-2">En invitant RoyalBot sur un serveur Discord ou en utilisant ses fonctionnalités, l'utilisateur accepte les présentes conditions. Si vous n'acceptez pas ces conditions, vous devez retirer le bot du serveur concerné.</p>
+        </div>
+
+        <div>
+          <h3 class="font-bold text-white">3. Conditions d'accès</h3>
+          <p class="mt-2">L'utilisation de RoyalBot nécessite un compte Discord et le respect des conditions d'utilisation de Discord. L'utilisateur doit disposer des autorisations nécessaires pour ajouter ou configurer le bot sur un serveur.</p>
+        </div>
+
+        <div>
+          <h3 class="font-bold text-white">4. Utilisation autorisée</h3>
+          <p class="mt-2">RoyalBot doit être utilisé uniquement pour la gestion, la protection et la modération de serveurs Discord. Toute utilisation abusive, frauduleuse, illégale, intrusive ou contraire aux règles de Discord est interdite.</p>
+        </div>
+
+        <div>
+          <h3 class="font-bold text-white">5. Responsabilité</h3>
+          <p class="mt-2">RoyalBot est fourni en l'état. Malgré les efforts réalisés pour assurer sa fiabilité, aucune garantie absolue n'est donnée concernant l'absence d'interruption, d'erreur ou de faille. Les administrateurs restent responsables de la configuration du bot et des actions effectuées sur leur serveur.</p>
+        </div>
+
+        <div>
+          <h3 class="font-bold text-white">6. Sanctions et suspension</h3>
+          <p class="mt-2">L'accès à RoyalBot peut être limité, suspendu ou supprimé en cas d'abus, de tentative de contournement, d'utilisation malveillante ou de violation des présentes conditions.</p>
+        </div>
+
+        <div>
+          <h3 class="font-bold text-white">7. Modification des conditions</h3>
+          <p class="mt-2">Ces conditions peuvent être modifiées afin de refléter l'évolution du service, des obligations légales ou des règles de Discord. La version publiée sur ce site constitue la version applicable.</p>
+        </div>
+
+        <div>
+          <h3 class="font-bold text-white">8. Contact</h3>
+          <p class="mt-2">Pour toute question relative aux conditions d'utilisation, vous pouvez contacter l'équipe via le serveur support Discord : <a class="text-purple-300 hover:text-purple-200" href="https://discord.gg/fGn9gCyepm">https://discord.gg/fGn9gCyepm</a>.</p>
+        </div>
+      </div>
+    </article>
+  </section>
+
+  <section id="confidentialite" class="legal-section px-6 py-16 relative z-10">
+    <article class="mx-auto max-w-4xl card p-6 md:p-8">
+      <p class="text-sm uppercase tracking-wide text-purple-300">Document légal</p>
+      <h2 class="mt-2 text-3xl font-bold">Politique de confidentialité</h2>
+      <p class="mt-2 text-sm text-gray-400">Dernière mise à jour : 17 mai 2026</p>
+
+      <div class="mt-8 space-y-6 text-gray-300">
+        <div>
+          <h3 class="font-bold text-white">1. Données collectées</h3>
+          <p class="mt-2">RoyalBot peut traiter certaines données nécessaires à son fonctionnement, notamment les identifiants Discord des utilisateurs, des serveurs, des salons, des rôles, ainsi que les informations liées aux actions de modération et de sécurité.</p>
+        </div>
+
+        <div>
+          <h3 class="font-bold text-white">2. Finalités du traitement</h3>
+          <p class="mt-2">Ces données sont utilisées pour fournir les fonctionnalités du bot : anti-raid, modération, logs, configuration du serveur, sécurité et assistance technique.</p>
+        </div>
+
+        <div>
+          <h3 class="font-bold text-white">3. Données de connexion Discord</h3>
+          <p class="mt-2">Lorsque vous utilisez la connexion Discord, RoyalBot peut recevoir les informations autorisées par Discord selon les permissions accordées, par exemple l'identifiant du compte et la liste des serveurs accessibles. Ces données servent uniquement à afficher et gérer les serveurs autorisés.</p>
+        </div>
+
+        <div>
+          <h3 class="font-bold text-white">4. Conservation</h3>
+          <p class="mt-2">Les données sont conservées uniquement pendant la durée nécessaire au fonctionnement du service, à la sécurité du serveur ou au respect d'obligations légales. Les données peuvent être supprimées lorsqu'elles ne sont plus utiles ou lorsqu'un serveur retire RoyalBot.</p>
+        </div>
+
+        <div>
+          <h3 class="font-bold text-white">5. Partage des données</h3>
+          <p class="mt-2">Les données ne sont pas vendues. Elles peuvent être traitées par Discord et par les services techniques strictement nécessaires au fonctionnement, à l'hébergement ou à la maintenance de RoyalBot.</p>
+        </div>
+
+        <div>
+          <h3 class="font-bold text-white">6. Sécurité</h3>
+          <p class="mt-2">Des mesures raisonnables sont mises en place pour protéger les données traitées par RoyalBot. Aucun système n'étant totalement infaillible, les administrateurs sont invités à limiter les permissions du bot aux besoins réels de leur serveur.</p>
+        </div>
+
+        <div>
+          <h3 class="font-bold text-white">7. Droits des utilisateurs</h3>
+          <p class="mt-2">Selon la réglementation applicable, vous pouvez demander l'accès, la correction ou la suppression des données vous concernant. Pour exercer ces droits, contactez l'équipe via le serveur support Discord.</p>
+        </div>
+
+        <div>
+          <h3 class="font-bold text-white">8. Contact confidentialité</h3>
+          <p class="mt-2">Pour toute demande liée à la confidentialité, utilisez le serveur support : <a class="text-purple-300 hover:text-purple-200" href="https://discord.gg/fGn9gCyepm">https://discord.gg/fGn9gCyepm</a>.</p>
+        </div>
+      </div>
+    </article>
+  </section>
+</main>
+
+<footer class="text-center py-8 text-gray-500 relative z-10">
+  <div class="flex flex-wrap justify-center gap-4 text-sm">
+    <a href="#cgu" class="hover:text-purple-300 transition">Conditions d'utilisation</a>
+    <a href="#confidentialite" class="hover:text-purple-300 transition">Politique de confidentialité</a>
+    <a href="https://discord.gg/fGn9gCyepm" class="hover:text-purple-300 transition">Support</a>
   </div>
-</section>
 
-<section class="grid md:grid-cols-2 lg:grid-cols-4 gap-6 px-10 py-10 relative z-10">
-
-  <div class="card p-6">
-    🔥 <h3 class="font-bold mt-2">Anti-Raid</h3>
-    <p class="text-gray-400 text-sm mt-2">Protection automatique contre raids et attaques.</p>
-  </div>
-
-  <div class="card p-6">
-    🛡️ <h3 class="font-bold mt-2">Modération</h3>
-    <p class="text-gray-400 text-sm mt-2">Kick, ban, mute en un clic.</p>
-  </div>
-
-  <div class="card p-6">
-    📜 <h3 class="font-bold mt-2">Logs</h3>
-    <p class="text-gray-400 text-sm mt-2">Historique complet des actions.</p>
-  </div>
-
-  <div class="card p-6">
-    ✨ <h3 class="font-bold mt-2">Updates</h3>
-    <p class="text-gray-400 text-sm mt-2">Nouvelles fonctionnalités régulières.</p>
-  </div>
-
-</section>
-
-<section id="login" class="text-center py-20 relative z-10">
-  <h2 class="text-3xl font-bold">Connexion Discord</h2>
-
-  <p class="text-gray-400 mt-3">
-    Connecte-toi à ton dashboard RoyalBot
-  </p>
-
-  <a class="mt-6 inline-block bg-indigo-600 px-6 py-3 rounded-xl hover:bg-indigo-500 transition"
-     href="https://discord.com/api/oauth2/authorize?client_id=1405970621724098611&redirect_uri=https%3A%2F%2Fnathan741m.github.io%2Froyalbot-site%2F&response_type=code&scope=identify%20guilds">
-    Se connecter avec Discord
-  </a>
-</section>
-
-<footer class="text-center py-6 text-gray-500 relative z-10">
-  👑 RoyalBot — Secure Discord Servers
+  <p class="mt-4">👑 RoyalBot - Secure Discord Servers</p>
 </footer>
 
 </body>
