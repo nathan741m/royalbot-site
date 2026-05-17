@@ -8,91 +8,230 @@
 <script src="https://cdn.tailwindcss.com"></script>
 
 <style>
+:root {
+  color-scheme: dark;
+}
+
+* {
+  box-sizing: border-box;
+}
+
 body {
   margin: 0;
-  font-family: sans-serif;
-  background: radial-gradient(circle at top, #12001f, #000000);
+  font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  background:
+    linear-gradient(135deg, rgba(11, 18, 32, 0.94), rgba(28, 8, 44, 0.92)),
+    radial-gradient(circle at 35% 0%, rgba(168,85,247,0.22), transparent 34%),
+    #05060d;
   overflow-x: hidden;
+  min-height: 100vh;
 }
 
-.glow {
-  position: absolute;
-  width: 600px;
-  height: 600px;
-  background: radial-gradient(circle, rgba(168,85,247,0.25), transparent 70%);
-  filter: blur(80px);
-  top: -200px;
-  left: -200px;
-  z-index: 0;
+button,
+input,
+select {
+  font: inherit;
 }
 
-.glow2 {
-  position: absolute;
-  width: 500px;
-  height: 500px;
-  background: radial-gradient(circle, rgba(236,72,153,0.25), transparent 70%);
-  filter: blur(80px);
-  bottom: -200px;
-  right: -200px;
-  z-index: 0;
+.panel {
+  background: rgba(255,255,255,0.06);
+  border: 1px solid rgba(255,255,255,0.12);
+  border-radius: 8px;
+  box-shadow: 0 24px 80px rgba(0,0,0,0.28);
 }
 
 .card {
-  background: rgba(255,255,255,0.05);
+  background: rgba(255,255,255,0.055);
   backdrop-filter: blur(12px);
   border: 1px solid rgba(168,85,247,0.2);
   border-radius: 8px;
-  transition: 0.3s;
+  transition: transform 0.2s ease, border-color 0.2s ease, background 0.2s ease;
 }
 
 .card:hover {
-  transform: translateY(-5px);
-  border-color: rgba(168,85,247,0.6);
+  transform: translateY(-4px);
+  border-color: rgba(168,85,247,0.58);
+  background: rgba(255,255,255,0.075);
 }
 
-.legal-section {
+.legal-section,
+.view {
   display: none;
 }
 
 .legal-section:target {
   display: block;
 }
+
+.view.active {
+  display: block;
+}
+
+.is-hidden {
+  display: none !important;
+}
+
+.field {
+  width: 100%;
+  border-radius: 8px;
+  border: 1px solid rgba(255,255,255,0.12);
+  background: rgba(10, 12, 24, 0.76);
+  color: white;
+  padding: 0.78rem 0.9rem;
+  outline: none;
+}
+  .field:focus {
+  border-color: rgba(168,85,247,0.78);
+  box-shadow: 0 0 0 3px rgba(168,85,247,0.14);
+}
+
+.tag {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 1.6rem;
+  white-space: nowrap;
+  border-radius: 999px;
+  padding: 0.25rem 0.68rem;
+  font-size: 0.75rem;
+  font-weight: 700;
+  border: 1px solid rgba(255,255,255,0.12);
+}
+
+.status-pending {
+  background: rgba(107, 114, 128, 0.28);
+  color: #d1d5db;
+}
+
+.status-connected {
+  background: rgba(34, 197, 94, 0.18);
+  color: #86efac;
+}
+
+.status-suspended {
+  background: rgba(239, 68, 68, 0.18);
+  color: #fca5a5;
+}
+
+.role-admin {
+  background: rgba(234, 179, 8, 0.2);
+  color: #fde68a;
+}
+
+.role-moderator {
+  background: rgba(22, 101, 52, 0.46);
+  color: #bbf7d0;
+}
+
+.role-guest {
+  background: rgba(249, 115, 22, 0.22);
+  color: #fed7aa;
+}
+
+.menu {
+  position: absolute;
+  top: 2.4rem;
+  right: 0;
+  width: min(92vw, 280px);
+  z-index: 50;
+}
+
+.menu-row {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr);
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.5rem 0.75rem;
+}
+
+.menu-select {
+  min-width: 0;
+  width: 100%;
+  padding: 0.55rem 0.65rem;
+  font-size: 0.875rem;
+}
+
+.toast {
+  position: fixed;
+  right: 1rem;
+  bottom: 1rem;
+  z-index: 100;
+  max-width: min(92vw, 420px);
+  border-radius: 8px;
+  background: rgba(17, 24, 39, 0.96);
+  border: 1px solid rgba(168,85,247,0.35);
+  padding: 0.9rem 1rem;
+  color: white;
+  box-shadow: 0 18px 60px rgba(0,0,0,0.38);
+}
+
+.avatar {
+  display: grid;
+  place-items: center;
+  overflow: hidden;
+  background: #2563eb;
+}
+
+.avatar img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+@media (max-width: 740px) {
+  .account-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .menu {
+    right: auto;
+    left: 0;
+  }
+}
 </style>
 </head>
 
 <body class="text-white">
-
-<div class="glow"></div>
-<div class="glow2"></div>
-
 <header class="flex flex-col gap-5 px-6 py-5 relative z-10 md:flex-row md:items-center md:justify-between md:px-8">
-  <a href="#" class="text-2xl font-bold text-purple-400">👑 RoyalBot</a>
+  <a href="#home" class="text-2xl font-bold text-purple-300">RoyalBot</a>
 
   <nav class="flex flex-wrap items-center gap-3 text-sm">
-    <a href="#features" class="text-gray-300 hover:text-white transition">Fonctionnalités</a>
+    <a href="#features" class="text-gray-300 hover:text-white transition">Fonctionnalites</a>
     <a href="#cgu" class="text-gray-300 hover:text-white transition">Conditions d'utilisation</a>
-    <a href="#confidentialite" class="text-gray-300 hover:text-white transition">Confidentialité</a>
-
-    <a href="https://discord.com/oauth2/authorize?client_id=1405970621724098611&permissions=8&scope=bot"
+    <a href="#confidentialite" class="text-gray-300 hover:text-white transition">Confidentialite</a>
+        <a href="https://discord.com/oauth2/authorize?client_id=1405970621724098611&permissions=8&scope=bot"
        class="bg-purple-600 px-4 py-2 rounded-lg hover:bg-purple-500 transition">
       Inviter
     </a>
 
-    <a href="#login"
+    <button id="loginNavButton"
        class="border border-purple-400 px-4 py-2 rounded-lg hover:bg-purple-900/30 transition">
       Connexion
-    </a>
+    </button>
+
+    <button id="adminNavButton"
+       class="hidden bg-amber-500 px-4 py-2 rounded-lg font-bold text-black hover:bg-amber-400 transition">
+      Espace Admin
+    </button>
+
+    <button id="profileNavButton"
+       class="hidden items-center gap-2 border border-purple-400 px-3 py-2 rounded-lg hover:bg-purple-900/30 transition">
+      <span id="navAvatar" class="avatar h-7 w-7 rounded-full text-xs font-bold"></span>
+      <span id="navUsername" class="font-semibold"></span>
+      <span id="navRoleTag" class="tag"></span>
+      <span aria-hidden="true">👤</span>
+    </button>
   </nav>
 </header>
 
-<main>
-  <section class="text-center py-24 px-6 relative z-10">
-    <h1 class="text-4xl font-extrabold bg-gradient-to-r from-purple-400 to-pink-400 text-transparent bg-clip-text md:text-6xl">
+<main id="home">
+  <section class="public-section text-center py-24 px-6 relative z-10">
+    <h1 class="text-4xl font-extrabold bg-gradient-to-r from-purple-300 via-pink-300 to-cyan-200 text-transparent bg-clip-text md:text-6xl">
       Protection Anti-Raid Ultime
     </h1>
 
     <p class="text-gray-300 mt-6 max-w-xl mx-auto">
-      Sécurise ton serveur Discord avec RoyalBot : modération, logs et anti-raid automatique.
+      Securise ton serveur Discord avec RoyalBot : moderation, logs, anti-raid automatique et gestion des acces equipe.
     </p>
 
     <div class="mt-8 flex flex-col justify-center gap-4 sm:flex-row">
@@ -108,7 +247,7 @@ body {
     </div>
   </section>
 
-  <section id="features" class="grid gap-6 px-6 py-10 relative z-10 md:grid-cols-2 lg:grid-cols-4 lg:px-10">
+  <section id="features" class="public-section grid gap-6 px-6 py-10 relative z-10 md:grid-cols-2 lg:grid-cols-4 lg:px-10">
     <div class="card p-6">
       <div class="text-2xl">🔥</div>
       <h2 class="font-bold mt-2">Anti-Raid</h2>
@@ -117,7 +256,7 @@ body {
 
     <div class="card p-6">
       <div class="text-2xl">🛡️</div>
-      <h2 class="font-bold mt-2">Modération</h2>
+      <h2 class="font-bold mt-2">Moderation</h2>
       <p class="text-gray-400 text-sm mt-2">Kick, ban, mute en un clic.</p>
     </div>
 
@@ -130,119 +269,198 @@ body {
     <div class="card p-6">
       <div class="text-2xl">✨</div>
       <h2 class="font-bold mt-2">Updates</h2>
-      <p class="text-gray-400 text-sm mt-2">Nouvelles fonctionnalités régulières.</p>
+      <p class="text-gray-400 text-sm mt-2">Nouvelles fonctionnalites regulieres.</p>
+    </div>
+  </section>
+    <section id="login" class="view px-6 py-16 relative z-10">
+    <div class="mx-auto max-w-xl">
+      <form id="loginForm" class="panel p-6 md:p-8">
+        <h2 class="text-3xl font-bold">Connexion</h2>
+
+        <label class="block text-sm font-semibold text-gray-200" for="loginUsername">Nom d'utilisateur</label>
+        <input id="loginUsername" class="field mt-2" autocomplete="username" required>
+
+        <label class="mt-5 block text-sm font-semibold text-gray-200" for="loginPassword">Mot de passe</label>
+        <input id="loginPassword" class="field mt-2" type="password" autocomplete="current-password" required>
+
+        <button class="mt-6 w-full rounded-lg bg-indigo-600 px-6 py-3 font-bold hover:bg-indigo-500 transition" type="submit">
+          Se connecter
+        </button>
+
+        <button id="openRegisterButton" class="mt-4 w-full rounded-lg border border-purple-400 px-6 py-3 font-bold hover:bg-purple-900/30 transition" type="button">
+          S'inscrire
+        </button>
+      </form>
     </div>
   </section>
 
-  <section id="login" class="text-center py-20 px-6 relative z-10">
-    <h2 class="text-3xl font-bold">Connexion Discord</h2>
+  <section id="register" class="view px-6 py-16 relative z-10">
+    <form id="registerForm" class="panel mx-auto max-w-xl p-6 md:p-8">
+      <h2 class="text-3xl font-bold">Creation de compte</h2>
 
-    <p class="text-gray-400 mt-3">
-      Connecte-toi à ton dashboard RoyalBot.
-    </p>
+      <label class="mt-6 block text-sm font-semibold text-gray-200" for="registerUsername">Nom d'utilisateur</label>
+      <input id="registerUsername" class="field mt-2" autocomplete="username" required>
 
-    <a class="mt-6 inline-block bg-indigo-600 px-6 py-3 rounded-lg hover:bg-indigo-500 transition"
-       href="https://discord.com/api/oauth2/authorize?client_id=1405970621724098611&redirect_uri=https%3A%2F%2Fnathan741m.github.io%2Froyalbot-site%2F&response_type=code&scope=identify%20guilds">
-      Se connecter avec Discord
-    </a>
+      <label class="mt-5 block text-sm font-semibold text-gray-200" for="registerPassword">Mot de passe</label>
+      <input id="registerPassword" class="field mt-2" type="password" autocomplete="new-password" minlength="8" required>
+
+      <label class="mt-5 block text-sm font-semibold text-gray-200" for="registerConfirmPassword">Confirmer le mot de passe</label>
+      <input id="registerConfirmPassword" class="field mt-2" type="password" autocomplete="new-password" minlength="8" required>
+
+      <button class="mt-6 w-full rounded-lg bg-emerald-600 px-6 py-3 font-bold hover:bg-emerald-500 transition" type="submit">
+        Creer mon compte
+      </button>
+
+      <button id="backToLoginButton" class="mt-4 w-full rounded-lg border border-purple-400 px-6 py-3 font-bold hover:bg-purple-900/30 transition" type="button">
+        Retour connexion
+      </button>
+    </form>
+  </section>
+
+  <section id="firstLogin" class="view px-6 py-16 relative z-10">
+    <form id="firstLoginForm" class="panel mx-auto max-w-xl p-6 md:p-8">
+      <p class="text-sm uppercase tracking-wide text-amber-300">Premier acces</p>
+      <h2 class="mt-2 text-3xl font-bold">Change ton mot de passe</h2>
+      <p class="mt-3 text-gray-400">Pour activer le compte, choisis un mot de passe personnel.</p>
+
+      <label class="mt-6 block text-sm font-semibold text-gray-200" for="newPassword">Nouveau mot de passe</label>
+      <input id="newPassword" class="field mt-2" type="password" minlength="8" required>
+
+      <label class="mt-5 block text-sm font-semibold text-gray-200" for="confirmPassword">Confirmer le mot de passe</label>
+      <input id="confirmPassword" class="field mt-2" type="password" minlength="8" required>
+
+      <button class="mt-6 w-full rounded-lg bg-emerald-600 px-6 py-3 font-bold hover:bg-emerald-500 transition" type="submit">
+        Enregistrer et entrer
+      </button>
+    </form>
+  </section>
+    <section id="dashboard" class="view px-6 py-10 relative z-10">
+    <div class="mx-auto max-w-7xl">
+      <div class="flex flex-col gap-4 md:flex-row md:items-end md:justify-between">
+        <div>
+          <p class="text-sm uppercase tracking-wide text-purple-300">Espace Admin</p>
+          <h2 class="mt-2 text-3xl font-bold">Gestion des comptes</h2>
+          <p id="permissionHint" class="mt-2 text-gray-400"></p>
+        </div>
+        <button id="openCreatePanel" class="hidden rounded-lg bg-purple-600 px-5 py-3 font-bold hover:bg-purple-500 transition">
+          Creer un compte
+        </button>
+      </div>
+
+      <div id="adminTools" class="mt-8 hidden grid gap-6 lg:grid-cols-[0.8fr_1.2fr]">
+        <form id="createAccountForm" class="panel p-6">
+          <h3 class="text-xl font-bold">Nouveau compte</h3>
+
+          <label class="mt-5 block text-sm font-semibold text-gray-200" for="createUsername">Nom d'utilisateur</label>
+          <input id="createUsername" class="field mt-2" required>
+
+          <label class="mt-5 block text-sm font-semibold text-gray-200" for="createRole">Grade</label>
+          <select id="createRole" class="field mt-2" required>
+            <option value="admin">Admin</option>
+            <option value="moderator">Moderateur</option>
+            <option value="guest">Guest</option>
+          </select>
+
+          <button class="mt-6 w-full rounded-lg bg-emerald-600 px-6 py-3 font-bold hover:bg-emerald-500 transition" type="submit">
+            Generer le mot de passe
+          </button>
+
+          <div id="generatedPasswordBox" class="mt-5 hidden rounded-lg border border-emerald-400/25 bg-emerald-500/10 p-4">
+            <p class="text-sm text-emerald-100">Mot de passe unique genere :</p>
+            <div class="mt-2 flex flex-col gap-2 sm:flex-row">
+              <input id="generatedPassword" class="field" readonly>
+              <button id="copyGeneratedPassword" class="rounded-lg border border-emerald-300/50 px-4 py-2 text-sm font-bold hover:bg-emerald-900/30" type="button">
+                Copier
+              </button>
+            </div>
+          </div>
+        </form>
+
+        <div class="panel p-6">
+          <div class="flex flex-col gap-4 md:flex-row md:items-center md:justify-between">
+            <h3 class="text-xl font-bold">Liste des comptes</h3>
+            <input id="accountSearch" class="field md:max-w-xs" placeholder="Chercher par pseudo">
+          </div>
+          <div id="accountsList" class="mt-6 space-y-3"></div>
+        </div>
+      </div>
+
+      <div id="limitedTools" class="mt-8 hidden panel p-6">
+        <h3 class="text-xl font-bold">Permissions</h3>
+        <p class="mt-2 text-gray-400"></p>
+      </div>
+    </div>
+  </section>
+    <section id="profile" class="view px-6 py-10 relative z-10">
+    <div class="mx-auto max-w-5xl panel p-6 md:p-8">
+      <div class="mb-6 flex items-center justify-between gap-4">
+        <div>
+          <p class="text-sm uppercase tracking-wide text-purple-300">Profil</p>
+          <h2 class="mt-2 text-3xl font-bold">Parametres du compte</h2>
+        </div>
+        <button id="closeProfile" class="rounded-lg border border-red-300/50 px-4 py-2 text-xl hover:bg-red-900/30" aria-label="Revenir a la page principale">
+          ❌
+        </button>
+      </div>
+
+      <div class="grid gap-8 md:grid-cols-[0.75fr_1.25fr]">
+        <aside class="rounded-lg border border-white/10 bg-white/[0.04] p-6 text-center">
+          <div id="profileAvatar" class="avatar mx-auto h-36 w-36 rounded-full text-5xl font-extrabold"></div>
+          <div id="profileRoleTag" class="tag mt-5"></div>
+
+          <label class="mt-6 inline-flex cursor-pointer rounded-lg border border-blue-300/50 px-4 py-2 text-sm font-bold hover:bg-blue-900/30">
+            Changer la photo
+            <input id="profilePhotoInput" class="hidden" type="file" accept="image/*">
+          </label>
+        </aside>
+
+        <form id="profileForm" class="rounded-lg border border-white/10 bg-white/[0.04] p-6">
+          <label class="block text-sm font-semibold text-gray-200" for="profileUsernameInput">Changer son pseudo</label>
+          <input id="profileUsernameInput" class="field mt-2" required>
+
+          <button class="mt-6 rounded-lg bg-emerald-600 px-6 py-3 font-bold hover:bg-emerald-500 transition" type="submit">
+            Enregistrer
+          </button>
+        </form>
+      </div>
+
+      <button id="logoutButton" class="mt-8 rounded-lg border border-red-300/50 px-5 py-3 font-bold text-red-100 hover:bg-red-900/30">
+        Deconnexion
+      </button>
+    </div>
   </section>
 
   <section id="cgu" class="legal-section px-6 py-16 relative z-10">
     <article class="mx-auto max-w-4xl card p-6 md:p-8">
-      <p class="text-sm uppercase tracking-wide text-purple-300">Document légal</p>
-      <h2 class="mt-2 text-3xl font-bold">Conditions générales d'utilisation</h2>
-      <p class="mt-2 text-sm text-gray-400">Dernière mise à jour : 17 mai 2026</p>
-
+      <p class="text-sm uppercase tracking-wide text-purple-300">Document legal</p>
+      <h2 class="mt-2 text-3xl font-bold">Conditions generales d'utilisation</h2>
+      <p class="mt-2 text-sm text-gray-400">Derniere mise a jour : 17 mai 2026</p>
       <div class="mt-8 space-y-6 text-gray-300">
-        <div>
-          <h3 class="font-bold text-white">1. Objet</h3>
-          <p class="mt-2">Les présentes conditions encadrent l'utilisation de RoyalBot, un bot Discord destiné à aider les administrateurs de serveurs à renforcer la modération, la sécurité anti-raid et le suivi des actions.</p>
-        </div>
-
-        <div>
-          <h3 class="font-bold text-white">2. Acceptation</h3>
-          <p class="mt-2">En invitant RoyalBot sur un serveur Discord ou en utilisant ses fonctionnalités, l'utilisateur accepte les présentes conditions. Si vous n'acceptez pas ces conditions, vous devez retirer le bot du serveur concerné.</p>
-        </div>
-
-        <div>
-          <h3 class="font-bold text-white">3. Conditions d'accès</h3>
-          <p class="mt-2">L'utilisation de RoyalBot nécessite un compte Discord et le respect des conditions d'utilisation de Discord. L'utilisateur doit disposer des autorisations nécessaires pour ajouter ou configurer le bot sur un serveur.</p>
-        </div>
-
-        <div>
-          <h3 class="font-bold text-white">4. Utilisation autorisée</h3>
-          <p class="mt-2">RoyalBot doit être utilisé uniquement pour la gestion, la protection et la modération de serveurs Discord. Toute utilisation abusive, frauduleuse, illégale, intrusive ou contraire aux règles de Discord est interdite.</p>
-        </div>
-
-        <div>
-          <h3 class="font-bold text-white">5. Responsabilité</h3>
-          <p class="mt-2">RoyalBot est fourni en l'état. Malgré les efforts réalisés pour assurer sa fiabilité, aucune garantie absolue n'est donnée concernant l'absence d'interruption, d'erreur ou de faille. Les administrateurs restent responsables de la configuration du bot et des actions effectuées sur leur serveur.</p>
-        </div>
-
-        <div>
-          <h3 class="font-bold text-white">6. Sanctions et suspension</h3>
-          <p class="mt-2">L'accès à RoyalBot peut être limité, suspendu ou supprimé en cas d'abus, de tentative de contournement, d'utilisation malveillante ou de violation des présentes conditions.</p>
-        </div>
-
-        <div>
-          <h3 class="font-bold text-white">7. Modification des conditions</h3>
-          <p class="mt-2">Ces conditions peuvent être modifiées afin de refléter l'évolution du service, des obligations légales ou des règles de Discord. La version publiée sur ce site constitue la version applicable.</p>
-        </div>
-
-        <div>
-          <h3 class="font-bold text-white">8. Contact</h3>
-          <p class="mt-2">Pour toute question relative aux conditions d'utilisation, vous pouvez contacter l'équipe via le serveur support Discord : <a class="text-purple-300 hover:text-purple-200" href="https://discord.gg/fGn9gCyepm">https://discord.gg/fGn9gCyepm</a>.</p>
-        </div>
+        <div><h3 class="font-bold text-white">1. Objet</h3><p class="mt-2">Les presentes conditions encadrent l'utilisation de RoyalBot, un bot Discord destine a aider les administrateurs de serveurs a renforcer la moderation, la securite anti-raid et le suivi des actions.</p></div>
+        <div><h3 class="font-bold text-white">2. Acceptation</h3><p class="mt-2">En invitant RoyalBot sur un serveur Discord ou en utilisant ses fonctionnalites, l'utilisateur accepte les presentes conditions.</p></div>
+        <div><h3 class="font-bold text-white">3. Conditions d'acces</h3><p class="mt-2">L'utilisation de RoyalBot necessite un compte Discord et le respect des conditions d'utilisation de Discord.</p></div>
+        <div><h3 class="font-bold text-white">4. Utilisation autorisee</h3><p class="mt-2">RoyalBot doit etre utilise uniquement pour la gestion, la protection et la moderation de serveurs Discord.</p></div>
+        <div><h3 class="font-bold text-white">5. Responsabilite</h3><p class="mt-2">RoyalBot est fourni en l'etat. Les administrateurs restent responsables de la configuration du bot et des actions effectuees.</p></div>
+        <div><h3 class="font-bold text-white">6. Sanctions et suspension</h3><p class="mt-2">L'acces a RoyalBot peut etre limite, suspendu ou supprime en cas d'abus ou de violation des presentes conditions.</p></div>
+        <div><h3 class="font-bold text-white">7. Modification des conditions</h3><p class="mt-2">Ces conditions peuvent etre modifiees afin de refleter l'evolution du service, des obligations legales ou des regles de Discord.</p></div>
+        <div><h3 class="font-bold text-white">8. Contact</h3><p class="mt-2">Contact support : <a class="text-purple-300 hover:text-purple-200" href="https://discord.gg/fGn9gCyepm">https://discord.gg/fGn9gCyepm</a>.</p></div>
       </div>
     </article>
   </section>
-
-  <section id="confidentialite" class="legal-section px-6 py-16 relative z-10">
+    <section id="confidentialite" class="legal-section px-6 py-16 relative z-10">
     <article class="mx-auto max-w-4xl card p-6 md:p-8">
-      <p class="text-sm uppercase tracking-wide text-purple-300">Document légal</p>
-      <h2 class="mt-2 text-3xl font-bold">Politique de confidentialité</h2>
-      <p class="mt-2 text-sm text-gray-400">Dernière mise à jour : 17 mai 2026</p>
-
+      <p class="text-sm uppercase tracking-wide text-purple-300">Document legal</p>
+      <h2 class="mt-2 text-3xl font-bold">Politique de confidentialite</h2>
+      <p class="mt-2 text-sm text-gray-400">Derniere mise a jour : 17 mai 2026</p>
       <div class="mt-8 space-y-6 text-gray-300">
-        <div>
-          <h3 class="font-bold text-white">1. Données collectées</h3>
-          <p class="mt-2">RoyalBot peut traiter certaines données nécessaires à son fonctionnement, notamment les identifiants Discord des utilisateurs, des serveurs, des salons, des rôles, ainsi que les informations liées aux actions de modération et de sécurité.</p>
-        </div>
-
-        <div>
-          <h3 class="font-bold text-white">2. Finalités du traitement</h3>
-          <p class="mt-2">Ces données sont utilisées pour fournir les fonctionnalités du bot : anti-raid, modération, logs, configuration du serveur, sécurité et assistance technique.</p>
-        </div>
-
-        <div>
-          <h3 class="font-bold text-white">3. Données de connexion Discord</h3>
-          <p class="mt-2">Lorsque vous utilisez la connexion Discord, RoyalBot peut recevoir les informations autorisées par Discord selon les permissions accordées, par exemple l'identifiant du compte et la liste des serveurs accessibles. Ces données servent uniquement à afficher et gérer les serveurs autorisés.</p>
-        </div>
-
-        <div>
-          <h3 class="font-bold text-white">4. Conservation</h3>
-          <p class="mt-2">Les données sont conservées uniquement pendant la durée nécessaire au fonctionnement du service, à la sécurité du serveur ou au respect d'obligations légales. Les données peuvent être supprimées lorsqu'elles ne sont plus utiles ou lorsqu'un serveur retire RoyalBot.</p>
-        </div>
-
-        <div>
-          <h3 class="font-bold text-white">5. Partage des données</h3>
-          <p class="mt-2">Les données ne sont pas vendues. Elles peuvent être traitées par Discord et par les services techniques strictement nécessaires au fonctionnement, à l'hébergement ou à la maintenance de RoyalBot.</p>
-        </div>
-
-        <div>
-          <h3 class="font-bold text-white">6. Sécurité</h3>
-          <p class="mt-2">Des mesures raisonnables sont mises en place pour protéger les données traitées par RoyalBot. Aucun système n'étant totalement infaillible, les administrateurs sont invités à limiter les permissions du bot aux besoins réels de leur serveur.</p>
-        </div>
-
-        <div>
-          <h3 class="font-bold text-white">7. Droits des utilisateurs</h3>
-          <p class="mt-2">Selon la réglementation applicable, vous pouvez demander l'accès, la correction ou la suppression des données vous concernant. Pour exercer ces droits, contactez l'équipe via le serveur support Discord.</p>
-        </div>
-
-        <div>
-          <h3 class="font-bold text-white">8. Contact confidentialité</h3>
-          <p class="mt-2">Pour toute demande liée à la confidentialité, utilisez le serveur support : <a class="text-purple-300 hover:text-purple-200" href="https://discord.gg/fGn9gCyepm">https://discord.gg/fGn9gCyepm</a>.</p>
-        </div>
+        <div><h3 class="font-bold text-white">1. Donnees collectees</h3><p class="mt-2">RoyalBot peut traiter les identifiants Discord des utilisateurs, serveurs, salons, roles et actions de moderation.</p></div>
+        <div><h3 class="font-bold text-white">2. Finalites du traitement</h3><p class="mt-2">Ces donnees sont utilisees pour fournir les fonctionnalites du bot : anti-raid, moderation, logs, configuration, securite et assistance.</p></div>
+        <div><h3 class="font-bold text-white">3. Donnees de connexion Discord</h3><p class="mt-2">La connexion Discord peut transmettre les informations autorisees selon les permissions accordees.</p></div>
+        <div><h3 class="font-bold text-white">4. Conservation</h3><p class="mt-2">Les donnees sont conservees pendant la duree necessaire au fonctionnement du service et a la securite.</p></div>
+        <div><h3 class="font-bold text-white">5. Partage des donnees</h3><p class="mt-2">Les donnees ne sont pas vendues. Elles peuvent etre traitees par Discord et les services techniques necessaires.</p></div>
+        <div><h3 class="font-bold text-white">6. Securite</h3><p class="mt-2">Des mesures raisonnables sont mises en place pour proteger les donnees traitees par RoyalBot.</p></div>
+        <div><h3 class="font-bold text-white">7. Droits des utilisateurs</h3><p class="mt-2">Vous pouvez demander l'acces, la correction ou la suppression des donnees vous concernant.</p></div>
+        <div><h3 class="font-bold text-white">8. Contact confidentialite</h3><p class="mt-2">Support : <a class="text-purple-300 hover:text-purple-200" href="https://discord.gg/fGn9gCyepm">https://discord.gg/fGn9gCyepm</a>.</p></div>
       </div>
     </article>
   </section>
@@ -251,12 +469,594 @@ body {
 <footer class="text-center py-8 text-gray-500 relative z-10">
   <div class="flex flex-wrap justify-center gap-4 text-sm">
     <a href="#cgu" class="hover:text-purple-300 transition">Conditions d'utilisation</a>
-    <a href="#confidentialite" class="hover:text-purple-300 transition">Politique de confidentialité</a>
+    <a href="#confidentialite" class="hover:text-purple-300 transition">Politique de confidentialite</a>
     <a href="https://discord.gg/fGn9gCyepm" class="hover:text-purple-300 transition">Support</a>
   </div>
-
-  <p class="mt-4">👑 RoyalBot - Secure Discord Servers</p>
+  <p class="mt-4">RoyalBot - Secure Discord Servers</p>
 </footer>
 
+<div id="toast" class="toast hidden" role="status"></div>
+
+<script>
+const STORAGE_KEY = "royalbot_accounts_v2";
+const SESSION_KEY = "royalbot_session_v2";
+const DEFAULT_ADMIN_PASSWORD = "RoyalBot-Admin-2026!";
+let pendingLoginId = null;
+
+const roleLabels = {
+  admin: "Admin",
+  moderator: "Moderateur",
+  guest: "Guest"
+};
+
+const roleClasses = {
+  admin: "role-admin",
+  moderator: "role-moderator",
+  guest: "role-guest"
+};
+
+const statusLabels = {
+  pending: "En cours de creation",
+  connected: "Connecte",
+  suspended: "Suspendu"
+};
+
+const statusClasses = {
+  pending: "status-pending",
+  connected: "status-connected",
+  suspended: "status-suspended"
+};
+
+const views = ["login", "register", "firstLogin", "dashboard", "profile"];
+  function getAccounts() {
+  return JSON.parse(localStorage.getItem(STORAGE_KEY) || "[]");
+}
+
+function saveAccounts(accounts) {
+  localStorage.setItem(STORAGE_KEY, JSON.stringify(accounts));
+}
+
+function getSession() {
+  return localStorage.getItem(SESSION_KEY);
+}
+
+function setSession(accountId) {
+  localStorage.setItem(SESSION_KEY, accountId);
+}
+
+function clearSession() {
+  localStorage.removeItem(SESSION_KEY);
+}
+
+function currentAccount() {
+  const id = getSession();
+  return getAccounts().find(account => account.id === id) || null;
+}
+
+function generateId() {
+  return "acct_" + Date.now().toString(36) + Math.random().toString(36).slice(2, 8);
+}
+
+function generatePassword() {
+  const alphabet = "ABCDEFGHJKLMNPQRSTUVWXYZabcdefghijkmnopqrstuvwxyz23456789!@$%";
+  if (window.crypto && typeof window.crypto.getRandomValues === "function") {
+    const values = window.crypto.getRandomValues(new Uint32Array(14));
+    return Array.from(values, value => alphabet[value % alphabet.length]).join("");
+  }
+  return Array.from({ length: 14 }, () => alphabet[Math.floor(Math.random() * alphabet.length)]).join("");
+}
+
+function normalizeUsername(value) {
+  return value.trim().replace(/\s+/g, " ");
+}
+
+function seedAdmin() {
+  const accounts = getAccounts();
+  const existingAdmin = accounts.find(account => account.username.toLowerCase() === "admin");
+  if (existingAdmin) return;
+  accounts.unshift({
+    id: generateId(),
+    username: "admin",
+    password: DEFAULT_ADMIN_PASSWORD,
+    role: "admin",
+    status: "pending",
+    mustChangePassword: true,
+    avatar: "",
+    createdAt: new Date().toISOString()
+  });
+  saveAccounts(accounts);
+}
+
+function showToast(message) {
+  const toast = document.getElementById("toast");
+  toast.textContent = message;
+  toast.classList.remove("hidden");
+  window.clearTimeout(showToast.timer);
+  showToast.timer = window.setTimeout(() => toast.classList.add("hidden"), 3600);
+}
+
+function showView(id) {
+  if (window.location.hash !== `#${id}`) {
+    history.replaceState(null, "", `#${id}`);
+  }
+  document.querySelectorAll(".public-section").forEach(section => section.classList.add("is-hidden"));
+  views.forEach(viewId => document.getElementById(viewId).classList.toggle("active", viewId === id));
+  if (id !== "dashboard") {
+    closeAllMenus();
+  }
+  if (id === "dashboard") renderDashboard();
+  if (id === "profile") renderProfile();
+  window.scrollTo({ top: 0, behavior: "smooth" });
+}
+
+function showPublicPage() {
+  if (window.location.hash && window.location.hash !== "#home" && window.location.hash !== "#features") {
+    history.replaceState(null, "", "#home");
+  }
+  document.querySelectorAll(".public-section").forEach(section => section.classList.remove("is-hidden"));
+  views.forEach(viewId => document.getElementById(viewId).classList.remove("active"));
+  closeAllMenus();
+}
+
+function showFeaturesPage() {
+  history.replaceState(null, "", "#features");
+  showPublicPage();
+  document.getElementById("features").scrollIntoView({ behavior: "smooth", block: "start" });
+}
+
+function showLegalPage() {
+  document.querySelectorAll(".public-section").forEach(section => section.classList.add("is-hidden"));
+  views.forEach(viewId => document.getElementById(viewId).classList.remove("active"));
+  closeAllMenus();
+  window.scrollTo({ top: 0, behavior: "smooth" });
+}
+  function roleTag(role) {
+  return `<span class="tag ${roleClasses[role]}">${roleLabels[role]}</span>`;
+}
+
+function statusTag(status) {
+  return `<span class="tag ${statusClasses[status]}">${statusLabels[status]}</span>`;
+}
+
+function avatarMarkup(account, sizeClass = "h-10 w-10", textClass = "text-sm") {
+  const initial = account.username ? account.username.charAt(0).toUpperCase() : "?";
+  if (account.avatar) {
+    return `<span class="avatar ${sizeClass} rounded-full ${textClass} font-bold"><img src="${account.avatar}" alt=""></span>`;
+  }
+  return `<span class="avatar ${sizeClass} rounded-full ${textClass} font-bold">${initial}</span>`;
+}
+
+function updateNav() {
+  const account = currentAccount();
+  const loginButton = document.getElementById("loginNavButton");
+  const adminButton = document.getElementById("adminNavButton");
+  const profileButton = document.getElementById("profileNavButton");
+
+  if (!account) {
+    loginButton.classList.remove("hidden");
+    adminButton.classList.add("hidden");
+    profileButton.classList.add("hidden");
+    return;
+  }
+
+  loginButton.classList.add("hidden");
+  adminButton.classList.toggle("hidden", account.role !== "admin");
+  profileButton.classList.remove("hidden");
+  profileButton.classList.add("inline-flex");
+  document.getElementById("navUsername").textContent = account.username;
+  document.getElementById("navRoleTag").className = `tag ${roleClasses[account.role]}`;
+  document.getElementById("navRoleTag").textContent = roleLabels[account.role];
+  const navAvatar = document.getElementById("navAvatar");
+  navAvatar.innerHTML = account.avatar ? `<img src="${account.avatar}" alt="">` : account.username.charAt(0).toUpperCase();
+}
+
+function renderDashboard() {
+  updateNav();
+  const account = currentAccount();
+  if (!account) {
+    showView("login");
+    return;
+  }
+
+  const permissionHint = document.getElementById("permissionHint");
+  const adminTools = document.getElementById("adminTools");
+  const limitedTools = document.getElementById("limitedTools");
+  const limitedText = limitedTools.querySelector("p");
+  const openCreatePanel = document.getElementById("openCreatePanel");
+
+  if (account.role === "admin") {
+    permissionHint.textContent = "Tu peux creer, chercher, modifier, suspendre et rouvrir les comptes.";
+    adminTools.classList.remove("hidden");
+    openCreatePanel.classList.remove("hidden");
+    limitedTools.classList.add("hidden");
+    renderAccountsList();
+    return;
+  }
+
+  adminTools.classList.add("hidden");
+  openCreatePanel.classList.add("hidden");
+  limitedTools.classList.remove("hidden");
+  if (account.role === "moderator") {
+    permissionHint.textContent = "Role Moderateur detecte.";
+    limitedText.textContent = "Les permissions Moderateur ne sont pas encore disponibles.";
+  } else {
+    permissionHint.textContent = "Role Guest detecte.";
+    limitedText.textContent = "Aucune permission n'est disponible pour le role Guest.";
+  }
+}
+  function renderAccountsList() {
+  const list = document.getElementById("accountsList");
+  const query = document.getElementById("accountSearch").value.trim().toLowerCase();
+  const accounts = getAccounts()
+    .filter(account => account.username.toLowerCase().includes(query))
+    .sort((a, b) => a.username.localeCompare(b.username));
+
+  if (accounts.length === 0) {
+    list.innerHTML = `<div class="rounded-lg border border-white/10 bg-white/[0.04] p-5 text-gray-400">Aucun compte trouve.</div>`;
+    return;
+  }
+
+  list.innerHTML = accounts.map(account => `
+    <div class="relative rounded-lg border border-white/10 bg-white/[0.04] p-4">
+      <div class="account-grid grid grid-cols-[auto_1fr_auto] items-center gap-4">
+        ${avatarMarkup(account)}
+        <div class="min-w-0">
+          <p class="truncate font-bold">${account.username}</p>
+          <div class="mt-2 flex flex-wrap gap-2">
+            ${statusTag(account.status)}
+            ${roleTag(account.role)}
+          </div>
+        </div>
+        <button class="menuButton rounded-lg border border-white/10 px-3 py-2 text-xl hover:bg-white/10" data-account-id="${account.id}" aria-label="Options du compte">
+          ⋮
+        </button>
+      </div>
+      <div class="menu panel hidden p-2" data-menu-for="${account.id}">
+        <button class="resetAccount block w-full rounded-md px-3 py-2 text-left text-sm hover:bg-white/10" data-account-id="${account.id}">Reset mot de passe</button>
+        <div class="menu-row mt-1 border-t border-white/10 pt-2">
+          <label class="text-xs font-bold uppercase tracking-wide text-gray-400">Grade</label>
+          <select class="changeRole field menu-select" data-account-id="${account.id}" aria-label="Changer grade">
+            <option value="admin" ${account.role === "admin" ? "selected" : ""}>Admin</option>
+            <option value="moderator" ${account.role === "moderator" ? "selected" : ""}>Moderateur</option>
+            <option value="guest" ${account.role === "guest" ? "selected" : ""}>Guest</option>
+          </select>
+        </div>
+        <button class="toggleSuspension mt-2 block w-full rounded-md px-3 py-2 text-left text-sm hover:bg-white/10" data-account-id="${account.id}">
+          ${account.status === "suspended" ? "Re ouvrir le compte" : "Fermer le compte"}
+        </button>
+        <button class="deleteAccount mt-1 block w-full rounded-md px-3 py-2 text-left text-sm text-red-200 hover:bg-red-900/30" data-account-id="${account.id}">
+          Supprimer
+        </button>
+      </div>
+    </div>
+  `).join("");
+}
+
+function closeAllMenus() {
+  document.querySelectorAll("[data-menu-for]").forEach(menu => menu.classList.add("hidden"));
+}
+
+function resetPassword(accountId) {
+  const accounts = getAccounts();
+  const account = accounts.find(item => item.id === accountId);
+  if (!account) return;
+  const password = generatePassword();
+  account.password = password;
+  account.mustChangePassword = true;
+  account.status = account.status === "suspended" ? "suspended" : "pending";
+  saveAccounts(accounts);
+  renderAccountsList();
+  document.getElementById("generatedPasswordBox").classList.remove("hidden");
+  document.getElementById("generatedPassword").value = password;
+  showToast(`Mot de passe reinitialise pour ${account.username}.`);
+}
+  function setRole(accountId, role) {
+  const accounts = getAccounts();
+  const account = accounts.find(item => item.id === accountId);
+  if (!account) return;
+  account.role = role;
+  saveAccounts(accounts);
+  renderAccountsList();
+  updateNav();
+  showToast(`Grade mis a jour : ${roleLabels[role]}.`);
+}
+
+function toggleSuspension(accountId) {
+  const accounts = getAccounts();
+  const account = accounts.find(item => item.id === accountId);
+  if (!account) return;
+  account.status = account.status === "suspended" ? "pending" : "suspended";
+  if (account.id === getSession() && account.status === "suspended") {
+    clearSession();
+    saveAccounts(accounts);
+    updateNav();
+    showView("login");
+    showToast("Ton compte a ete suspendu.");
+    return;
+  }
+  saveAccounts(accounts);
+  renderAccountsList();
+  showToast(account.status === "suspended" ? "Compte suspendu." : "Compte rouvert.");
+}
+
+function deleteAccount(accountId) {
+  const currentId = getSession();
+  const accounts = getAccounts();
+  const account = accounts.find(item => item.id === accountId);
+  if (!account) return;
+
+  if (account.id === currentId) {
+    showToast("Tu ne peux pas supprimer ton propre compte pendant que tu es connecte.");
+    return;
+  }
+
+  const confirmed = window.confirm(`Supprimer le compte ${account.username} ?`);
+  if (!confirmed) return;
+
+  saveAccounts(accounts.filter(item => item.id !== accountId));
+  renderAccountsList();
+  showToast("Compte supprime.");
+}
+
+function renderProfile() {
+  const account = currentAccount();
+  if (!account) {
+    showView("login");
+    return;
+  }
+  const avatar = document.getElementById("profileAvatar");
+  avatar.innerHTML = account.avatar ? `<img src="${account.avatar}" alt="">` : account.username.charAt(0).toUpperCase();
+  document.getElementById("profileUsernameInput").value = account.username;
+  document.getElementById("profileRoleTag").className = `tag ${roleClasses[account.role]}`;
+  document.getElementById("profileRoleTag").textContent = roleLabels[account.role];
+}
+  document.addEventListener("click", event => {
+  const menuButton = event.target.closest(".menuButton");
+  if (menuButton) {
+    const accountId = menuButton.dataset.accountId;
+    const menu = document.querySelector(`[data-menu-for="${accountId}"]`);
+    const wasHidden = menu.classList.contains("hidden");
+    closeAllMenus();
+    menu.classList.toggle("hidden", !wasHidden);
+    return;
+  }
+
+  if (!event.target.closest(".menu")) {
+    closeAllMenus();
+  }
+});
+
+document.addEventListener("change", event => {
+  if (event.target.matches(".changeRole")) {
+    setRole(event.target.dataset.accountId, event.target.value);
+  }
+});
+
+document.addEventListener("click", event => {
+  if (event.target.matches(".resetAccount")) {
+    resetPassword(event.target.dataset.accountId);
+  }
+  if (event.target.matches(".toggleSuspension")) {
+    toggleSuspension(event.target.dataset.accountId);
+  }
+  if (event.target.matches(".deleteAccount")) {
+    deleteAccount(event.target.dataset.accountId);
+  }
+});
+
+document.getElementById("loginNavButton").addEventListener("click", () => showView("login"));
+document.getElementById("openRegisterButton").addEventListener("click", () => showView("register"));
+document.getElementById("backToLoginButton").addEventListener("click", () => showView("login"));
+document.getElementById("adminNavButton").addEventListener("click", () => {
+  showView("dashboard");
+  window.setTimeout(() => document.getElementById("createUsername").focus(), 80);
+});
+document.getElementById("profileNavButton").addEventListener("click", () => showView("profile"));
+document.getElementById("closeProfile").addEventListener("click", () => showView("dashboard"));
+document.getElementById("openCreatePanel").addEventListener("click", () => {
+  document.getElementById("createUsername").focus();
+});
+
+document.getElementById("loginForm").addEventListener("submit", event => {
+  event.preventDefault();
+  const username = normalizeUsername(document.getElementById("loginUsername").value);
+  const password = document.getElementById("loginPassword").value;
+  const account = getAccounts().find(item => item.username.toLowerCase() === username.toLowerCase());
+
+  if (!account || account.password !== password) {
+    showToast("Nom d'utilisateur ou mot de passe incorrect.");
+    return;
+  }
+
+  if (account.status === "suspended") {
+    showToast("Ce compte est suspendu.");
+    return;
+  }
+
+  pendingLoginId = account.id;
+  if (account.mustChangePassword) {
+    showView("firstLogin");
+    return;
+  }
+
+  account.status = "connected";
+  const accounts = getAccounts().map(item => item.id === account.id ? account : item);
+  saveAccounts(accounts);
+  setSession(account.id);
+  updateNav();
+  showFeaturesPage();
+});
+  document.getElementById("registerForm").addEventListener("submit", event => {
+  event.preventDefault();
+  const username = normalizeUsername(document.getElementById("registerUsername").value);
+  const password = document.getElementById("registerPassword").value;
+  const confirmPassword = document.getElementById("registerConfirmPassword").value;
+  const accounts = getAccounts();
+
+  if (password !== confirmPassword) {
+    showToast("Les mots de passe ne correspondent pas.");
+    return;
+  }
+
+  if (accounts.some(account => account.username.toLowerCase() === username.toLowerCase())) {
+    showToast("Ce nom d'utilisateur existe deja.");
+    return;
+  }
+
+  const account = {
+    id: generateId(),
+    username,
+    password,
+    role: "guest",
+    status: "connected",
+    mustChangePassword: false,
+    avatar: "",
+    createdAt: new Date().toISOString()
+  };
+
+  accounts.push(account);
+  saveAccounts(accounts);
+  setSession(account.id);
+  document.getElementById("registerForm").reset();
+  updateNav();
+  showFeaturesPage();
+  showToast("Compte cree. Tu es connecte en Guest.");
+});
+
+document.getElementById("firstLoginForm").addEventListener("submit", event => {
+  event.preventDefault();
+  const newPassword = document.getElementById("newPassword").value;
+  const confirmPassword = document.getElementById("confirmPassword").value;
+  if (newPassword !== confirmPassword) {
+    showToast("Les mots de passe ne correspondent pas.");
+    return;
+  }
+  const accounts = getAccounts();
+  const account = accounts.find(item => item.id === pendingLoginId);
+  if (!account) {
+    showToast("Session introuvable, reconnecte-toi.");
+    showView("login");
+    return;
+  }
+  account.password = newPassword;
+  account.mustChangePassword = false;
+  account.status = "connected";
+  saveAccounts(accounts);
+  setSession(account.id);
+  pendingLoginId = null;
+  document.getElementById("firstLoginForm").reset();
+  updateNav();
+  showFeaturesPage();
+});
+
+document.getElementById("createAccountForm").addEventListener("submit", event => {
+  event.preventDefault();
+  const current = currentAccount();
+  if (!current || current.role !== "admin") {
+    showToast("Action reservee aux Admins.");
+    return;
+  }
+  const username = normalizeUsername(document.getElementById("createUsername").value);
+  const role = document.getElementById("createRole").value;
+  const accounts = getAccounts();
+  if (accounts.some(account => account.username.toLowerCase() === username.toLowerCase())) {
+    showToast("Ce nom d'utilisateur existe deja.");
+    return;
+  }
+  const password = generatePassword();
+  accounts.push({
+    id: generateId(),
+    username,
+    password,
+    role,
+    status: "pending",
+    mustChangePassword: true,
+    avatar: "",
+    createdAt: new Date().toISOString()
+  });
+  saveAccounts(accounts);
+  document.getElementById("createAccountForm").reset();
+  document.getElementById("generatedPasswordBox").classList.remove("hidden");
+  document.getElementById("generatedPassword").value = password;
+  renderAccountsList();
+  showToast("Compte cree. Donne le mot de passe genere a la personne.");
+});
+
+document.getElementById("copyGeneratedPassword").addEventListener("click", async () => {
+  const value = document.getElementById("generatedPassword").value;
+  if (!value) return;
+  await navigator.clipboard.writeText(value);
+  showToast("Mot de passe copie.");
+});
+
+document.getElementById("accountSearch").addEventListener("input", renderAccountsList);
+
+document.getElementById("profileForm").addEventListener("submit", event => {
+  event.preventDefault();
+  const account = currentAccount();
+  if (!account) return;
+  const newUsername = normalizeUsername(document.getElementById("profileUsernameInput").value);
+  const accounts = getAccounts();
+  const duplicate = accounts.some(item => item.id !== account.id && item.username.toLowerCase() === newUsername.toLowerCase());
+  if (duplicate) {
+    showToast("Ce pseudo est deja utilise.");
+    return;
+  }
+  const target = accounts.find(item => item.id === account.id);
+  target.username = newUsername;
+  saveAccounts(accounts);
+  renderProfile();
+  updateNav();
+  showToast("Profil enregistre.");
+});
+
+document.getElementById("profilePhotoInput").addEventListener("change", event => {
+  const file = event.target.files[0];
+  const account = currentAccount();
+  if (!file || !account) return;
+  const reader = new FileReader();
+  reader.onload = () => {
+    const accounts = getAccounts();
+    const target = accounts.find(item => item.id === account.id);
+    target.avatar = reader.result;
+    saveAccounts(accounts);
+    renderProfile();
+    updateNav();
+    showToast("Photo de profil mise a jour.");
+  };
+  reader.readAsDataURL(file);
+});
+
+document.getElementById("logoutButton").addEventListener("click", () => {
+  clearSession();
+  updateNav();
+  showView("login");
+  showToast("Tu es deconnecte.");
+});
+
+window.addEventListener("hashchange", () => {
+  const hash = window.location.hash.replace("#", "");
+  if (views.includes(hash)) {
+    showView(hash);
+  } else if (hash === "cgu" || hash === "confidentialite") {
+    showLegalPage();
+  } else {
+    showPublicPage();
+  }
+});
+
+seedAdmin();
+updateNav();
+const startingHash = window.location.hash.replace("#", "");
+if (views.includes(startingHash)) {
+  showView(startingHash);
+} else if (startingHash === "cgu" || startingHash === "confidentialite") {
+  showLegalPage();
+} else if (currentAccount()) {
+  showView("dashboard");
+} else {
+  showPublicPage();
+}
+</script>
 </body>
 </html>
